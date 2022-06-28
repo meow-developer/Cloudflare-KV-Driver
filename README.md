@@ -11,10 +11,6 @@
 
 ```
 npm install cloudflare-kv-driver
-
-# or ...
-
-yarn add cloudflare-kv-driver
 ```
 
 ## Quick Start
