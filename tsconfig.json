@@ -18,7 +18,8 @@
       "noPropertyAccessFromIndexSignature": true,
       "noUncheckedIndexedAccess": true,
       "checkJs": true,
-      "moduleResolution": "node"
+      "moduleResolution": "node",
+      "declaration": true
     },
     "include": ["src/**/*", "test/**/*"],
   }
