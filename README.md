@@ -261,7 +261,7 @@ await workersKv.write({
 	keyName: "keyName"
 }, "value")
 ```
-**Warning**
+**:warning: Warning**
 The Monitor will only generate messages if it's executed before the database operation function is executed.
 
 ### Monitoring failed events
