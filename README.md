@@ -236,9 +236,9 @@ import { WorkersKv, WorkersKvMonitor } from  'cloudflare-kv-driver'
 
 const kvMonitor  = new WorkersKvMonitor(); //The monitoring device
 const workersKv  = new WorkersKv(
-	process.env.CF_ACCOUNT_ID,
-	process.env.CF_GLOBAL_API_KEY,
-	process.env.CF_EMAIL,
+	process.env["CF_EMAIL"],
+	process.env["CF_ACCOUNT_ID"],
+	process.env["CF_GLOBAL_API_KEY"],
 	kvMonitor.dbListener.bind(kvMonitor) //Binding a database event listener to the driver
 )
 ```
@@ -255,7 +255,14 @@ const workersKv  = new WorkersKv(
 kvMonitor.dbMonitorStream().on("success", (msg)=>{
 	console.log(msg)
 })
+
+await workersKv.write({
+	namespaceId: "namespaceId",
+	keyName: "keyName"
+}, "value")
 ```
+**Warning**
+The Monitor will only generate messages if it's executed before the database operation function is executed.
 
 ### Monitoring failed events
  
