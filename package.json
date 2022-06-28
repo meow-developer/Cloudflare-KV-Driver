@@ -9,6 +9,7 @@
     "driver"
   ],
   "main": "./build/index.js",
+  "types": "./build/index.d.ts",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
