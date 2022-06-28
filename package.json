@@ -1,6 +1,6 @@
 {
   "name": "cloudflare-kv-driver",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A driver that used to perform database operations for Cloudflare KV",
   "keywords": [
     "Cloudflare",
@@ -44,11 +44,11 @@
   ],
   "type": "module",
   "ava": {
-		"extensions": {
-			"ts": "module"
-		},
-		"nodeArguments": [
-			"--loader=ts-node/esm"
-		]
-	}
+    "extensions": {
+      "ts": "module"
+    },
+    "nodeArguments": [
+      "--loader=ts-node/esm"
+    ]
+  }
 }
