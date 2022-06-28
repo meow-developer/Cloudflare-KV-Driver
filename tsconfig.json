@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+      "watch": true,
+      "outDir": "./build",
+      "lib": ["es2021"],
+      "module": "es2022",
+      "target": "es2021",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "allowUnusedLabels": false,
+      "allowUnreachableCode": false,
+      "exactOptionalPropertyTypes": true,
+      "noFallthroughCasesInSwitch": true,
+      "noImplicitOverride": true,
+      "noImplicitReturns": true,
+      "noPropertyAccessFromIndexSignature": true,
+      "noUncheckedIndexedAccess": true,
+      "checkJs": true,
+      "moduleResolution": "node"
+    },
+    "include": ["src/**/*", "test/**/*"],
+  }
+  
