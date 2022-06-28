@@ -262,7 +262,7 @@ await workersKv.write({
 }, "value")
 ```
 **:warning: Warning**
-The Monitor will only generate messages if it's executed before the database operation function is executed.
+The Monitor device will only generate messages if it's executed before the database operation function is executed.
 
 ### Monitoring failed events
  
