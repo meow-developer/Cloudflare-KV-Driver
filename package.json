@@ -1,6 +1,6 @@
 {
   "name": "cf-kv-driver",
-  "version": "1.0.6",
+  "version": "1.0.1",
   "description": "An unofficial Cloudflare Kv Node.js Driver",
   "keywords": [
     "Cloudflare",
