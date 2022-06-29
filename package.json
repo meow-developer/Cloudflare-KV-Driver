@@ -1,6 +1,6 @@
 {
   "name": "cf-kv-driver",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A driver that used to perform database operations for Cloudflare KV",
   "keywords": [
     "Cloudflare",
@@ -51,5 +51,5 @@
       "--loader=ts-node/esm"
     ]
   },
-    "repository": "github:ansleehk/Cloudflare-KV-Driver"
+  "repository": "github:ansleehk/Cloudflare-KV-Driver"
 }
