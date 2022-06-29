@@ -1,7 +1,7 @@
 {
   "name": "cf-kv-driver",
   "version": "1.0.4",
-  "description": "A driver that used to perform database operations for Cloudflare KV",
+  "description": "An unofficial Cloudflare Kv Node.js Driver",
   "keywords": [
     "Cloudflare",
     "Cloudflare KV",

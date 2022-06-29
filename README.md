@@ -80,7 +80,7 @@ await workersKv.listNamespaceKeys({namespaceId: "namespaceId"})
 
 ```js
 workersKv.listNamespaceKeys(
-	relativePathParameter: {
+	relativePathParam: {
 		namespaceId: string
 	},
 	urlParam?: {
@@ -130,7 +130,7 @@ await workersKv.write({
 
 ```js
 workersKv.writeKeyValuePair(
-	relativePathParameter: {
+	relativePathParam: {
 		namespaceId: string,
 		keyName: string
 	},
@@ -156,7 +156,7 @@ await workersKv.writeKeyValuePairMeta({
 
 ```js
 workersKv.writeKeyValuePairMeta(
-	relativePathParameter: {
+	relativePathParam: {
 		namespaceId: string,
 		keyName: string
 	},
@@ -184,7 +184,7 @@ await workersKv.writeMultipleKeyValuePairs({
 
 ```js
 workersKv.writeMultipleKeyValuePairs(
-        relativePathParameter: {
+        relativePathParam: {
             namespaceId: string,
         },
         data: Array<{
