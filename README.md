@@ -69,7 +69,7 @@ await workersKv.removeNamespace({namespaceId: "namespaceId"})
 
 ```js
 await workersKv.renameNamespace({namespaceId: "namespaceId"}, 
-				{title: "title"})
+				{title: "title"}) //The new namespace name
 ```
 
 ### List a Namespace's Keys
@@ -175,7 +175,7 @@ workersKv.writeKeyValuePairMeta(
 
 ```js
 const data = [{key: "key1", value: "value1"}, 
-			{key: "key2", value: "value2"}]
+		{key: "key2", value: "value2"}]
 
 await workersKv.writeMultipleKeyValuePairs({
             namespaceId: string,
@@ -189,7 +189,7 @@ workersKv.writeMultipleKeyValuePairs(
         },
         data: Array<{
             key: string,
-            value: string
+            value: string,
             expiration?: number,
             expiration_ttl?: number,
             metadata?: { [key: string]: any },
