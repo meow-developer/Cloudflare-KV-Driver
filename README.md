@@ -10,7 +10,7 @@
 ## Installation
 
 ```
-npm install cloudflare-kv-driver
+npm install cf-kv-driver
 ```
 
 ## Quick Start
