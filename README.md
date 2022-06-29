@@ -17,7 +17,7 @@ npm install cf-kv-driver
 
 ```js
 
-import { WorkersKv } from  'cloudflare-kv-driver'
+import { WorkersKv } from  'cf-kv-driver'
 
 const  workersKv  =  new  WorkersKv(
 	//The email associated with the Cloudflare account
@@ -228,7 +228,7 @@ await workersKv.deleteMultipleKeyValuePairs(
 ## Monitoring Device
 
 ```js
-import { WorkersKv, WorkersKvMonitor } from  'cloudflare-kv-driver'
+import { WorkersKv, WorkersKvMonitor } from  'cf-kv-driver'
 
 const kvMonitor  = new WorkersKvMonitor(); //The monitoring device
 const workersKv  = new WorkersKv(
