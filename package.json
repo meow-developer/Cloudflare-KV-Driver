@@ -50,5 +50,6 @@
     "nodeArguments": [
       "--loader=ts-node/esm"
     ]
-  }
+  },
+    "repository": "github:ansleehk/Cloudflare-KV-Driver"
 }
