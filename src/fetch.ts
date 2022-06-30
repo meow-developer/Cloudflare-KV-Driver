@@ -42,7 +42,12 @@ export namespace FetchInterfaces {
         isCfNormal: boolean
         isCfReqSuccess: boolean
     }
-
+    type fetchMaterialBodyHeaders = {
+        method: httpMethod,
+        body: string | FormData | null, 
+        headers: {[key: string]: string}
+    }
+    export type fetchMaterial = [string, fetchMaterialBodyHeaders]
 }
 
 export class CfHttpFetch{
@@ -105,14 +110,13 @@ export class CfHttpFetch{
         return formattedParams;
     }
     /**
-     * @async
      * @function genFetch
      * @description Generate the fetch request based on the request path, body, headers, and http method
      * @param reqBody - The HTTP request body
      * @param headers - The HTTP request headers
-     * @returns {Promise} - The HTTP response from Cloudflare that's processed by the NodeFetch module
+     * @returns {Array} - The materials that can be used to make the fetch request for the NodeFetch module
      */
-    private async genFetch(reqBody: string | FormData | null, headers: {[key: string]: string} = {}): Promise<Response> {
+    private genFetch(reqBody: string | FormData | null, headers: {[key: string]: string} = {}): FetchInterfaces.fetchMaterial {
         
         const DEFAULT_PATH = `${CF_API_ENDPOINT}/accounts/${this.cfAuth.accountId}/${CF_KV_API_PATH}/`
 
@@ -131,23 +135,24 @@ export class CfHttpFetch{
                 return DEFAULT_PATH + path + "?" + this.genParam()
         }
 
-        return ( await fetch(
+        return [
             fullPath(),
             {
                 method: this.http.method,
                 body: reqBody,
                 headers: { ...headers,  ...DEFAULT_HEADER }
             }
-        ))
+        ]
+
+
     }
     /**
-     * @async
      * @function contentTypeSwitcher
      * @description Generate a suitable HTTP request data based on the content type
-     * @returns - The HTTP response from Cloudflare that's processed by the NodeFetch module
+     * @returns - The materials that can be used to make the fetch request for the NodeFetch module
      */
-    private async contentTypeSwitcher(): Promise<Response>{
-        let response;
+    private contentTypeSwitcher(): FetchInterfaces.fetchMaterial{
+        let fetchMaterial: FetchInterfaces.fetchMaterial;
         const body = this.http.body;
         
         const formattedBody = body == null ? undefined: body;
@@ -155,12 +160,12 @@ export class CfHttpFetch{
         switch (this.http.contentType){
             case "json":
                 if (formattedBody == undefined) throw "body is empty";
-                response = this.genFetch(
+                fetchMaterial = this.genFetch(
                     JSON.stringify(formattedBody), {"Content-Type": "application/json"}
                 )
                 break;
             case "plainText":
-                response = this.genFetch(
+                fetchMaterial = this.genFetch(
                     JSON.stringify(formattedBody), {"Content-Type": "text/plain"}
                 )
                 break;
@@ -172,18 +177,18 @@ export class CfHttpFetch{
                     formData.set(key, formattedBody[key])
                 }
 
-                response = this.genFetch(
+                fetchMaterial = this.genFetch(
                     formData, {}
                 )
                 break;
             case "none":
-                response = this.genFetch(
+                fetchMaterial = this.genFetch(
                     JSON.stringify(formattedBody), {}
                 )
                 break;
         }
 
-        return response;
+        return fetchMaterial;
     }
     /**
      * @function httpResParser
@@ -267,7 +272,8 @@ export class CfHttpFetch{
      */
     async fetch(): Promise<FetchInterfaces.ownFetchResponse>{
         try{
-            const req = await this.contentTypeSwitcher();
+            const fetchMaterial = this.contentTypeSwitcher();
+            const req = await fetch(fetchMaterial[0], fetchMaterial[1])
             const formattedRes = await this.httpResParser(req);
 
             const isCfNormal = this.isCfResNormal(formattedRes);
