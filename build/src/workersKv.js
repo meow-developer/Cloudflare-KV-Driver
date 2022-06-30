@@ -1,6 +1,6 @@
 /** Local Modules */
 import { CfHttpFetch } from './fetch.js';
-import { CustomConsole, CustomError } from './util.js';
+import { CustomConsole, WorkersKvError } from './util.js';
 /** Downloaded Modules */
 import { serializeError } from 'serialize-error';
 export class WorkersKv {
@@ -20,7 +20,7 @@ export class WorkersKv {
         this.write = this.writeKeyValuePair;
         this.delete = this.deleteKeyValuePair;
         if (accountId === undefined || globalApiKey === undefined || accountEmail == undefined) {
-            throw new Error("Account Id, Global Api Key and Account Email must not be undefined");
+            throw new WorkersKvError("Account Id, Global Api Key and Account Email must not be undefined", "", {});
         }
         this.cfAuth = {
             accountId: accountId,
@@ -79,7 +79,7 @@ export class WorkersKv {
      */
     genReturnFromCfRes(method, req, command) {
         if (!req.isCfReqSuccess) {
-            throw new CustomError(`Failed to ${command}`, "", req.cfRes["errors"]);
+            throw new WorkersKvError(`Failed to ${command}`, "", req.cfRes["errors"]);
         }
         switch (method) {
             case "boolean":
@@ -240,7 +240,7 @@ export class WorkersKv {
             return response;
         }
         else {
-            throw new CustomError(`Failed to ${command.command}`, "", req.cfRes["errors"]);
+            throw new WorkersKvError(`Failed to ${command.command}`, "", req.cfRes["errors"]);
         }
     }
     /**

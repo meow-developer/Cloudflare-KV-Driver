@@ -1,6 +1,6 @@
 import test from 'ava'
 import { WorkersKv } from '../src/index.js'
-import { CustomError } from '../src/util.js'
+import { WorkersKvError } from '../src/util.js'
 
 const CF_EMAIL = process.env["CF_EMAIL"]
 const CF_ACCOUNT_ID = process.env["CF_ACCOUNT_ID"]
@@ -63,7 +63,7 @@ const removeNamespace = () => {
         
          await t.throwsAsync(async ()=>{
             const req = await cfWorkers.removeNamespace({namespaceId: namespaceId})
-        }, {instanceOf: CustomError, name:"Failed to Remove a namespace"})
+        }, {instanceOf: WorkersKvError, name:"Failed to Remove a namespace"})
     })
 }
 
@@ -89,7 +89,7 @@ const renameNamespace = () => {
         
         await t.throwsAsync(async ()=>{
             const req = await cfWorkers.renameNamespace({namespaceId: namespaceId}, {title: namespaceNewName})
-        }, {instanceOf: CustomError, name:"Failed to Rename a namespace"})
+        }, {instanceOf: WorkersKvError, name:"Failed to Rename a namespace"})
     
     })
 }

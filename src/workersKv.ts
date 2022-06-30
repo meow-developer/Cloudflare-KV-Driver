@@ -45,7 +45,7 @@ export class WorkersKv {
         ...extensionArg: Array<Function>
     ) {
         if (accountId === undefined || globalApiKey === undefined || accountEmail == undefined) {
-            throw new WorkersKvError("Account Id, Global Api Key and Account Email must not be undefined", "")
+            throw new WorkersKvError("Account Id, Global Api Key and Account Email must not be undefined", "", {})
         }
 
         this.cfAuth = {

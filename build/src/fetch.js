@@ -1,5 +1,5 @@
 /** Local Modules */
-import { CustomError } from './util.js';
+import { WorkersKvError } from './util.js';
 /** Downloaded Modules */
 import fetch, { FormData } from 'node-fetch';
 import { URLSearchParams } from 'url';
@@ -198,7 +198,7 @@ export class CfHttpFetch {
             };
         }
         catch (err) {
-            throw new CustomError("Http fetch error", "Error occurred when sending a http request", serializeError(err));
+            throw new WorkersKvError("Http fetch error", "Error occurred when sending a http request", serializeError(err));
         }
     }
 }

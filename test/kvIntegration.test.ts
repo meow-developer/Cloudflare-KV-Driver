@@ -1,6 +1,6 @@
 import test from 'ava'
 import { WorkersKv } from '../src/index.js'
-import { CustomError } from '../src/util.js'
+import { WorkersKvError } from '../src/util.js'
 
 import { createTempNamespace, removeTempNamespace } from './kvUnit.test.js'
 

@@ -20,7 +20,7 @@ export class CustomConsole {
  * @class
  * @description Customize the thrown error class
  */
-export class CustomError extends Error {
+export class WorkersKvError extends Error {
     /**
      *
      * @param title The title of the error
@@ -31,7 +31,7 @@ export class CustomError extends Error {
     constructor(title, msg, errDetail, ...params) {
         super(...params);
         if (Error.captureStackTrace) {
-            Error.captureStackTrace(this, CustomError);
+            Error.captureStackTrace(this, WorkersKvError);
         }
         this.name = title;
         this.message = msg;

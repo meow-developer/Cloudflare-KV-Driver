@@ -18,7 +18,7 @@ export declare class CustomConsole {
  * @class
  * @description Customize the thrown error class
  */
-export declare class CustomError extends Error {
+export declare class WorkersKvError extends Error {
     errDetail: {
         [key: string]: any;
     };
