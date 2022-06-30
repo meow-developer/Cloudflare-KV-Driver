@@ -22,9 +22,9 @@ export class WorkersKvMonitor {
     }
     /**
      * @function dbMonitorStream
-     * @description Create an event stream when a database activity is received
+     * @description Create an event message when a database activity is received
      * @remarks
-     * This function can only be executed before the dbListener function is called. Otherwise, no event will be emitted.
+     * This function can only be executed before the dbListener function is called. Otherwise, no message will be emitted.
      * @returns {EventEmitter} The event emitter that will generate messages in regard to database activities
      */
     dbMonitorStream() {

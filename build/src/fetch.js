@@ -8,9 +8,10 @@ const CF_API_ENDPOINT = "https://api.cloudflare.com/client/v4";
 const CF_KV_API_PATH = "storage/kv";
 export class CfHttpFetch {
     /**
-     *
-     * @param cfAuth
-     * @param http
+     * @constructor
+     * @param {Object} cfAuth - The authentication information that used to access the Cloudflare KV services
+     * @param {Object} http - The HTTP request information
+     * @param {string} validateCfResponseMethod - The method that used to validate the response from Cloudflare
      */
     constructor(cfAuth, http, validateCfResponseMethod = "full") {
         this.cfAuth = {
@@ -30,8 +31,8 @@ export class CfHttpFetch {
     /**
      * @function genParam
      * @private
-     * @description Generate the parameters in URL parameter format
-     * @returns {Object} The URL format parameters
+     * @description Converting the URL parameters into a suitable format
+     * @returns {Object} - The URL format parameters
      */
     genParam() {
         const params = this.http.params;
@@ -46,12 +47,12 @@ export class CfHttpFetch {
     }
     /**
      * @function genFetch
-     * @description Generate the fetch request by combining the request path, body, headers, and http method
-     * @param reqBody
-     * @param headers
-     * @returns {Response}
+     * @description Generate the fetch request based on the request path, body, headers, and http method
+     * @param reqBody - The HTTP request body
+     * @param headers - The HTTP request headers
+     * @returns {Array} - The materials that can be used to make the fetch request for the NodeFetch module
      */
-    async genFetch(reqBody, headers = {}) {
+    genFetch(reqBody, headers = {}) {
         const DEFAULT_PATH = `${CF_API_ENDPOINT}/accounts/${this.cfAuth.accountId}/${CF_KV_API_PATH}/`;
         const DEFAULT_HEADER = {
             "X-Auth-Key": this.cfAuth.globalApiKey,
@@ -65,49 +66,52 @@ export class CfHttpFetch {
             else
                 return DEFAULT_PATH + path + "?" + this.genParam();
         };
-        return (await fetch(fullPath(), {
-            method: this.http.method,
-            body: reqBody,
-            headers: { ...headers, ...DEFAULT_HEADER }
-        }));
+        return [
+            fullPath(),
+            {
+                method: this.http.method,
+                body: reqBody,
+                headers: { ...headers, ...DEFAULT_HEADER }
+            }
+        ];
     }
     /**
      * @function contentTypeSwitcher
-     * @async
-     * @description
-     * @returns
+     * @description Generate a suitable HTTP request data based on the content type
+     * @returns - The materials that can be used to make the fetch request for the NodeFetch module
      */
-    async contentTypeSwitcher() {
-        let response;
+    contentTypeSwitcher() {
+        let fetchMaterial;
         const body = this.http.body;
         const formattedBody = body == null ? undefined : body;
         switch (this.http.contentType) {
             case "json":
                 if (formattedBody == undefined)
                     throw "body is empty";
-                response = this.genFetch(JSON.stringify(formattedBody), { "Content-Type": "application/json" });
+                fetchMaterial = this.genFetch(JSON.stringify(formattedBody), { "Content-Type": "application/json" });
                 break;
             case "plainText":
-                response = this.genFetch(JSON.stringify(formattedBody), { "Content-Type": "text/plain" });
+                fetchMaterial = this.genFetch(JSON.stringify(formattedBody), { "Content-Type": "text/plain" });
                 break;
             case "formData":
+                if (typeof formattedBody !== "object")
+                    throw "The formatted body is not an object";
                 let formData = new FormData();
-                if (typeof (formattedBody) !== "object")
-                    throw "Received non object data to form a formData";
                 for (const key of Object.keys(formattedBody)) {
                     formData.set(key, formattedBody[key]);
                 }
-                response = this.genFetch(formData, {});
+                fetchMaterial = this.genFetch(formData, {});
                 break;
             case "none":
-                response = this.genFetch(JSON.stringify(formattedBody), {});
+                fetchMaterial = this.genFetch(JSON.stringify(formattedBody), {});
                 break;
         }
-        return response;
+        return fetchMaterial;
     }
     /**
      * @function httpResParser
-     * @param httpRes
+     * @description Parsing the HTTP response that's sent from Cloudflare
+     * @param httpRes - The HTTP response from Cloudflare that's processed by the NodeFetch module
      */
     async httpResParser(httpRes) {
         return {
@@ -122,8 +126,8 @@ export class CfHttpFetch {
     }
     /**
      * @function isCfResNormal
-     * @description Analyzing whether the content of the response from Cloudflare is normal
-     * @param res
+     * @description Checking whether the content of the response from Cloudflare is normal
+     * @param {object} res - The response that's processed by the httpResParser function
      */
     isCfResNormal(res) {
         let isNormal = res.http.success;
@@ -155,9 +159,9 @@ export class CfHttpFetch {
     }
     /**
      * @function isCfSuccess
-     * @description Analyzing whether the database operation has been performed successfully
-     * @param isCfResNormal
-     * @param res
+     * @description Checking whether the database operation has been performed successfully
+     * @param {boolean} isCfResNormal - The value indicates whether the Cloudflare response is normal
+     * @param res - The response that's processed by the httpResParser function
      */
     isCfSuccess(isCfResNormal, res) {
         let isSuccess = false;
@@ -176,14 +180,14 @@ export class CfHttpFetch {
         return isSuccess;
     }
     /**
-     * @function fetch
      * @async
-     * @description
-     * @returns {Promise}
+     * @function fetch
+     * @description Performing and handling the fetch request
      */
     async fetch() {
         try {
-            const req = await this.contentTypeSwitcher();
+            const fetchMaterial = this.contentTypeSwitcher();
+            const req = await fetch(fetchMaterial[0], fetchMaterial[1]);
             const formattedRes = await this.httpResParser(req);
             const isCfNormal = this.isCfResNormal(formattedRes);
             const isCfReqSuccess = this.isCfSuccess(isCfNormal, formattedRes);
