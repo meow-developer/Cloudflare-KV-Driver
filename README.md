@@ -24,7 +24,7 @@ const  workersKv  =  new  WorkersKv(
 	process.env["CF_EMAIL"],
 	//The ID of the Cloudflare account
 	process.env["CF_ACCOUNT_ID"],
-	//The global api key that has all the access right to the Cloudflare account
+	//The global api key that has all the access rights to the Cloudflare account
 	process.env["CF_GLOBAL_API_KEY"],
 )
 
