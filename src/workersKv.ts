@@ -116,16 +116,24 @@ export class WorkersKv {
      * @param {string} method Returning part of the Cloudflare response
      */
     private genReturnFromCfRes(method: "boolean" | "fullResult" | "string", req: FetchInterfaces.ownFetchResponse, command: string){
-        if (!req.isCfReqSuccess) {
-            throw new WorkersKvError(`Failed to ${command}`, "", req.cfRes["errors"])
-        }
-        switch (method){
-            case "boolean":
-                return req.isCfReqSuccess
-            case "fullResult":
-                return req.cfRes["result"]
-            case "string":
-                return req.cfRes
+        try{
+            if (!req.isCfReqSuccess) {
+                if (typeof req.cfRes == "object" && Object.getOwnPropertyNames(req).includes("errors")){
+                    throw new WorkersKvError(`Failed to ${command}`, "", req.cfRes["errors"])
+                } else {
+                    throw new WorkersKvError(`Failed to ${command}`, "Cloudflare did not return the error information. Please refer to the raw HTTP response.", req.http)
+                }
+            }
+            switch (method){
+                case "boolean":
+                    return req.isCfReqSuccess
+                case "fullResult":
+                    return req.cfRes["result"]
+                case "string":
+                    return req.cfRes
+            }
+        } catch (err) {
+            throw new WorkersKvError(`Failed to ${command}`, "Fatal error while processing the request", serializeError(err))
         }
     }
 
