@@ -54,9 +54,10 @@ export class CfHttpFetch{
     http: FetchInterfaces.httpFetchOptions
     validateCfResponseMethod: "string" | "full" | "withoutResult"
     /**
-     * 
-     * @param cfAuth 
-     * @param http 
+     * @constructor
+     * @param {Object} cfAuth - The authentication information that used to access the Cloudflare KV services
+     * @param {Object} http - The HTTP request information
+     * @param {string} validateCfResponseMethod - The method that used to validate the response from Cloudflare
      */
     constructor(
         cfAuth: {
@@ -91,8 +92,8 @@ export class CfHttpFetch{
     /**
      * @function genParam
      * @private
-     * @description Generate the parameters in URL parameter format
-     * @returns {Object} The URL format parameters
+     * @description Converting the URL parameters into a suitable format
+     * @returns {Object} - The URL format parameters
      */
     private genParam(): URLSearchParams{
         const params = this.http.params;
@@ -104,11 +105,12 @@ export class CfHttpFetch{
         return formattedParams;
     }
     /**
+     * @async
      * @function genFetch
-     * @description Generate the fetch request by combining the request path, body, headers, and http method
-     * @param reqBody 
-     * @param headers 
-     * @returns {Response}
+     * @description Generate the fetch request based on the request path, body, headers, and http method
+     * @param reqBody - The HTTP request body
+     * @param headers - The HTTP request headers
+     * @returns {Promise} - The HTTP response from Cloudflare that's processed by the NodeFetch module
      */
     private async genFetch(reqBody: string | FormData | null, headers: {[key: string]: string} = {}): Promise<Response> {
         
@@ -139,12 +141,12 @@ export class CfHttpFetch{
         ))
     }
     /**
-     * @function contentTypeSwitcher
      * @async
-     * @description 
-     * @returns 
+     * @function contentTypeSwitcher
+     * @description Generate a suitable HTTP request data based on the content type
+     * @returns - The HTTP response from Cloudflare that's processed by the NodeFetch module
      */
-    private async contentTypeSwitcher(){
+    private async contentTypeSwitcher(): Promise<Response>{
         let response;
         const body = this.http.body;
         
@@ -163,11 +165,13 @@ export class CfHttpFetch{
                 )
                 break;
             case "formData":
+                if ( typeof formattedBody !== "object") throw "The formatted body is not an object"
+
                 let formData = new FormData();
-                if (typeof(formattedBody) !== "object") throw "Received non object data to form a formData"
                 for (const key of Object.keys(formattedBody)){
                     formData.set(key, formattedBody[key])
                 }
+
                 response = this.genFetch(
                     formData, {}
                 )
@@ -183,7 +187,8 @@ export class CfHttpFetch{
     }
     /**
      * @function httpResParser
-     * @param httpRes 
+     * @description Parsing the HTTP response that's sent from Cloudflare
+     * @param httpRes - The HTTP response from Cloudflare that's processed by the NodeFetch module
      */
     private async httpResParser(httpRes: Response): Promise<FetchInterfaces.fetchResponse>{
         return {
@@ -198,8 +203,8 @@ export class CfHttpFetch{
     }
     /**
      * @function isCfResNormal
-     * @description Analyzing whether the content of the response from Cloudflare is normal
-     * @param res
+     * @description Checking whether the content of the response from Cloudflare is normal
+     * @param {object} res - The response that's processed by the httpResParser function
      */
      protected isCfResNormal(res: FetchInterfaces.fetchResponse): boolean{
 
@@ -235,9 +240,9 @@ export class CfHttpFetch{
     }
     /**
      * @function isCfSuccess
-     * @description Analyzing whether the database operation has been performed successfully
-     * @param isCfResNormal 
-     * @param res 
+     * @description Checking whether the database operation has been performed successfully
+     * @param {boolean} isCfResNormal - The value indicates whether the Cloudflare response is normal
+     * @param res - The response that's processed by the httpResParser function
      */
     protected isCfSuccess(isCfResNormal: boolean, res: FetchInterfaces.fetchResponse){
         let isSuccess = false;
@@ -256,10 +261,9 @@ export class CfHttpFetch{
         return isSuccess;
     }
     /**
-     * @function fetch
      * @async
-     * @description 
-     * @returns {Promise}
+     * @function fetch
+     * @description Performing and handling the fetch request
      */
     async fetch(): Promise<FetchInterfaces.ownFetchResponse>{
         try{
