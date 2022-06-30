@@ -2,7 +2,7 @@
 import { Response } from 'node-fetch/@types/index'
 
 /** Local Modules */
-import { CustomError } from './util.js';
+import { WorkersKvError } from './util.js';
 
 /** Downloaded Modules */
 import fetch, { FormData } from 'node-fetch';
@@ -285,7 +285,7 @@ export class CfHttpFetch{
                 ...formattedRes
             };
         } catch (err) {
-            throw new CustomError("Http fetch error", "Error occurred when sending a http request", serializeError(err));
+            throw new WorkersKvError("Http fetch error", "Error occurred when sending a http request", serializeError(err));
         }
     }
 }
