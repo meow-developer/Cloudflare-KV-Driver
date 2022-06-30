@@ -97,7 +97,7 @@ export class WorkersKv {
             }
         }
         catch (err) {
-            throw new WorkersKvError(`Failed to ${command}`, "Fatal error while processing the request", serializeError(err));
+            throw new WorkersKvError(`Failed to ${command}`, "Fatal error occurred while processing the request", serializeError(err));
         }
     }
     /**
