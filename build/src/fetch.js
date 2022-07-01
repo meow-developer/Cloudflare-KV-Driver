@@ -9,7 +9,7 @@ const CF_KV_API_PATH = "storage/kv";
 export class CfHttpFetch {
     /**
      * @constructor
-     * @param {Object} cfAuth - The authentication information that used to access the Cloudflare KV services
+     * @param {Object} cfAuth - The authentication information that used to access the Cloudflare KV service
      * @param {Object} http - The HTTP request information
      * @param {string} validateCfResponseMethod - The method that used to validate the response from Cloudflare
      */

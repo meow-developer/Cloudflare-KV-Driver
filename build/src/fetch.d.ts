@@ -51,7 +51,7 @@ export declare class CfHttpFetch {
     validateCfResponseMethod: "string" | "full" | "withoutResult";
     /**
      * @constructor
-     * @param {Object} cfAuth - The authentication information that used to access the Cloudflare KV services
+     * @param {Object} cfAuth - The authentication information that used to access the Cloudflare KV service
      * @param {Object} http - The HTTP request information
      * @param {string} validateCfResponseMethod - The method that used to validate the response from Cloudflare
      */

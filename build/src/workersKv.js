@@ -51,7 +51,7 @@ export class WorkersKv {
                 body: http.body,
                 contentType: http.contentType
             }, validateCfResponseMethod).fetch();
-            this.funcArgHandlers(true, command, cfFetch, null);
+            this.funcArgHandlers(cfFetch.isCfReqSuccess, command, cfFetch, null);
             return cfFetch;
         }
         catch (err) {
