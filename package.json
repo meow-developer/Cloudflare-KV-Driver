@@ -10,9 +10,6 @@
   ],
   "main": "./build/src/index.js",
   "types": "./build/src/index.d.ts",
-  "scripts": {
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
-  },
   "author": {
     "name": "Anson Lee",
     "email": "ansleehk@gmail.com"
