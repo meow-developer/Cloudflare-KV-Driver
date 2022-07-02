@@ -1,6 +1,6 @@
 import test from 'ava';
 import { WorkersKv, WorkersKvMonitor } from '../src/index.js';
-import { createTempNamespace, removeTempNamespace, genTempDbName } from './temp.js';
+import { createTempNamespace, removeTempNamespace, genTempDbName } from './util.js';
 const CF_EMAIL = process.env["CF_EMAIL"];
 const CF_ACCOUNT_ID = process.env["CF_ACCOUNT_ID"];
 const CF_GLOBAL_API_KEY = process.env["CF_GLOBAL_API_KEY"];

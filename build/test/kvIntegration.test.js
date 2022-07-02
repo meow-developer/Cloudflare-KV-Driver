@@ -1,10 +1,5 @@
 import test from 'ava';
-import { WorkersKv } from '../src/index.js';
-import { createTempNamespace, removeTempNamespace, genTempDbName } from './temp.js';
-const CF_EMAIL = process.env["CF_EMAIL"];
-const CF_ACCOUNT_ID = process.env["CF_ACCOUNT_ID"];
-const CF_GLOBAL_API_KEY = process.env["CF_GLOBAL_API_KEY"];
-const cfWorkers = new WorkersKv(CF_EMAIL, CF_ACCOUNT_ID, CF_GLOBAL_API_KEY);
+import { cfWorkers, createTempNamespace, removeTempNamespace, genTempDbName } from './util.js';
 const namespaceTest = () => {
     const namespaceName = genTempDbName(namespaceTest.name);
     let namespaceId = null;

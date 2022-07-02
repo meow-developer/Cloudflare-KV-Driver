@@ -43,7 +43,7 @@
     ],
     "files": [
       "test/**",
-      "!test/temp.ts"
+      "!test/util.ts"
     ]
   },
   "repository": {
