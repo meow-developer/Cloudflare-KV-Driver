@@ -403,7 +403,6 @@ export class WorkersKv {
      * @param {boolean} data.base64 - Whether or not the server should base64 decode the value before storing it. Useful for writing values that wouldn't otherwise be valid JSON strings, such as images.
      */
     async writeMultipleKeyValuePairs(relativePathParam, data) {
-        const customLog = new CustomConsole();
         const command = {
             commandType: "CRUD",
             command: "Write multiple key-value pairs",

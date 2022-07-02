@@ -575,9 +575,6 @@ export class WorkersKv {
             base64?: boolean
         }>
     ): Promise<boolean>{
-        const customLog = new CustomConsole();
-
-
         const command: WorkersKvInterfaces.bridgeCommand = {
             commandType: "CRUD",
             command: "Write multiple key-value pairs",
