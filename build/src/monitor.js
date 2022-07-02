@@ -14,7 +14,7 @@ export class WorkersKvMonitor {
      */
     dbListener(processSuccess, command, cfFetch, errDetail) {
         this.dbActivityEmitter.emit("dbActivity", {
-            processSuccess: processSuccess || null,
+            processSuccess: processSuccess,
             action: command || null,
             cfFetch: cfFetch || null,
             errDetail: errDetail || null
