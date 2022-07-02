@@ -33,18 +33,17 @@ export class CustomConsole{
     errDetail: {[key: string]: any}
     /**
      * 
-     * @param title The title of the error 
-     * @param msg The short description of the error
-     * @param errDetail The detail of the error
-     * @param params The extra information of the error
+     * @param title - The title of the error 
+     * @param msg - The short description of the error
+     * @param errDetail - The detail of the error
+     * @param params - The extra information of the error
      */
-    constructor(title: string, msg: string, errDetail: {[key: string]: any}, ...params: Array<string>) {
-        super(...params)
+    constructor(title: string, msg: string, errDetail: {[key: string]: any}) {
+        super(msg)
         if (Error.captureStackTrace) {
             Error.captureStackTrace(this, WorkersKvError)
         }
         this.name = title;
-        this.message = msg;
         this.errDetail = errDetail;
     }
 }
