@@ -83,7 +83,7 @@ export class WorkersKv {
                 contentType: http.contentType
             }, validateCfResponseMethod).fetch()
 
-            this.funcArgHandlers(cfFetch.isCfReqSuccess, command, cfFetch, null)
+            this.funcArgHandlers(cfFetch.isCfReqSuccess, command, cfFetch, cfFetch.cfRes["errors"] || null)
 
             return cfFetch;
 
@@ -116,24 +116,20 @@ export class WorkersKv {
      * @param {string} method Returning part of the Cloudflare response
      */
     private genReturnFromCfRes(method: "boolean" | "fullResult" | "string", req: FetchInterfaces.ownFetchResponse, command: string){
-        try{
-            if (!req.isCfReqSuccess) {
-                if (typeof req.cfRes == "object" && Object.getOwnPropertyNames(req).includes("errors")){
-                    throw new WorkersKvError(`Failed to ${command}`, "", req.cfRes["errors"])
-                } else {
-                    throw new WorkersKvError(`Failed to ${command}`, "Cloudflare did not return the error information.", req.http)
-                }
+        if (!req.isCfReqSuccess) {
+            if (typeof req.cfRes == "object" && Object.getOwnPropertyNames(req.cfRes).includes("errors")){
+                throw new WorkersKvError(`Failed to ${command}`, "", req.cfRes["errors"])
+            } else {
+                throw new WorkersKvError(`Failed to ${command}`, "Cloudflare did not return the error information.", req.http)
             }
-            switch (method){
-                case "boolean":
-                    return req.isCfReqSuccess
-                case "fullResult":
-                    return req.cfRes["result"]
-                case "string":
-                    return req.cfRes
-            }
-        } catch (err) {
-            throw new WorkersKvError(`Failed to ${command}`, "Fatal error occurred while processing the request", serializeError(err))
+        }
+        switch (method){
+            case "boolean":
+                return req.isCfReqSuccess
+            case "fullResult":
+                return req.cfRes["result"]
+            case "string":
+                return req.cfRes
         }
     }
 

@@ -31,7 +31,7 @@ export class WorkersKvMonitor{
                 errDetail: {[key: string]: any} | null){
 
         this.dbActivityEmitter.emit("dbActivity", {
-            processSuccess: processSuccess || null,
+            processSuccess: processSuccess,
             action: command || null,
             cfFetch: cfFetch|| null,
             errDetail: errDetail || null
