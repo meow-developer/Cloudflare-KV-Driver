@@ -126,7 +126,51 @@ const removeNamespace = () => {
     })
 }
 
+const writeKeyValuePair = () => {
+    const namespaceName = genTempDbName(writeKeyValuePair.name);
+    let namespaceId: string | null = null;
+
+    const keyName = writeKeyValuePair.name;
+    const value = "abc"
+
+    test.before("Create a temp namespace for test purpose", async() => {
+        namespaceId = await createTempNamespace(namespaceName)
+    })
+    test("Write data to a key - With no URL params", async t => {
+        const req = await cfWorkers.writeKeyValuePair({namespaceId: namespaceId!, keyName: keyName}, value);
+        t.is(req,true);
+    })
+    test("Write data to a key - With URL params", async t => {
+        const req = await cfWorkers.writeKeyValuePair({namespaceId: namespaceId!, keyName: keyName}
+                                                        ,value, {expiration_ttl: 300});
+        t.is(req,true);
+    })
+    test.after("Remove the temp namespace", async() => {
+        await removeTempNamespace(namespaceId!)
+    })
+}
+
+const writeMultipleKeyValuePairs = () => {
+    const namespaceName = genTempDbName(writeMultipleKeyValuePairs.name);
+    let namespaceId: string | null = null;
+
+    const data = [{key: "a", value: "b", expiration_ttl: 300}, 
+                    {key: "b", value: "d", expiration: Math.trunc(Date.now() / 1000 + 300)}]
+
+    test.before("Create a temp namespace for test purpose", async() => {
+        namespaceId = await createTempNamespace(namespaceName)
+    })
+    test("Write data to multiple keys - With optional parameters", async t => {
+        const req = await cfWorkers.writeMultipleKeyValuePairs({namespaceId: namespaceId!}, data)
+         t.is(req,true);
+    })
+    test.after("Remove the temp namespace", async() => {
+        await removeTempNamespace(namespaceId!)
+    })
+}
+
 createNamespace();
 removeNamespace();
 renameNamespace();
 listNamespaces();
+writeMultipleKeyValuePairs()

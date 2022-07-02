@@ -321,8 +321,8 @@ export class WorkersKv {
      * @param {string} relativePathParam.keyName - The name of the key
      * @param {string} value - A UTF-8 encoded string to be stored, up to 10 MB in length.
      * @param {Object} urlParam - The parameters at the end of URL
-     * @param {number} urlParam.expiration
-     * @param {number} urlParam.expiration_ttl
+     * @param {number} urlParam.expiration - The time, measured in number of seconds since the UNIX epoch, at which the key should expire.
+     * @param {number} urlParam.expiration_ttl - The number of seconds for which the key should be visible before it expires. At least 60.
      */
     async writeKeyValuePair(relativePathParam, value, urlParam) {
         const customLog = new CustomConsole();
