@@ -24,12 +24,12 @@ export declare class WorkersKvError extends Error {
     };
     /**
      *
-     * @param title The title of the error
-     * @param msg The short description of the error
-     * @param errDetail The detail of the error
-     * @param params The extra information of the error
+     * @param title - The title of the error
+     * @param msg - The short description of the error
+     * @param errDetail - The detail of the error
+     * @param params - The extra information of the error
      */
     constructor(title: string, msg: string, errDetail: {
         [key: string]: any;
-    }, ...params: Array<string>);
+    });
 }

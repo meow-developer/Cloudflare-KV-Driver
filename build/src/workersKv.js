@@ -34,9 +34,9 @@ export class WorkersKv {
      * @async
      * @private
      * @description Handles the database operation that wants to be performed. It conveys the database operation request to the fetch function, receives the response from the fetch function, and send the whole database operation information to the function handler for extension purpose.
-     * @param {Object} command The requested database operation
-     * @param {Object} http The http request for the database operation
-     * @returns {Promise}
+     * @param {Object} command - The requested database operation
+     * @param {Object} http - The http request for the database operation
+     * @returns {Promise} - A full response (including whole http response) from Cloudflare
      */
     async bridge(command, http, validateCfResponseMethod = "full") {
         try {
@@ -62,10 +62,10 @@ export class WorkersKv {
     /**
      * @function funcArgHandlers
      * @description It sends the database operation information to the function placed in the extensionArg of the class constructor
-     * @param processSuccess Indicates whether the database operation has been performed successfully
-     * @param command The requested database operation
-     * @param cfFetch The response from Cloudflare on the database operation
-     * @param errDetail The error detail of the database operation
+     * @param {boolean} processSuccess - Indicates whether the database operation has been performed successfully
+     * @param {object} command - The requested database operation
+     * @param {object} cfFetch - The response from Cloudflare on the database operation
+     * @param {object} errDetail - The error detail of the database operation
      */
     funcArgHandlers(processSuccess, command, cfFetchRes = null, errDetail = null) {
         for (const func of this.extensionArg) {
@@ -104,11 +104,11 @@ export class WorkersKv {
      * @function listNamespaces
      * @public
      * @see https://api.cloudflare.com/#workers-kv-namespace-list-namespaces
-     * @param urlParam The parameters that are in the URL
-     * @param urlParam.page Page number of paginated results
-     * @param urlParam.perPage Maximum number of results per page
-     * @param urlParam.order Field to order results by
-     * @param urlParam.direction Direction to order namespaces
+     * @param {object} urlParam - The parameters that are in the URL
+     * @param {number} urlParam.page - Page number of paginated results
+     * @param {number} urlParam.perPage - Maximum number of results per page
+     * @param {string} urlParam.order - Field to order results by
+     * @param {string} urlParam.direction - Direction to order namespaces
      */
     async listNamespaces(urlParam) {
         const reqData = urlParam || {};
@@ -135,8 +135,8 @@ export class WorkersKv {
      * @description Creates a namespace under the given title. A 400 is returned if the account already owns a namespace with this title. A namespace must be explicitly deleted to be replaced.
      * @public
      * @see https://api.cloudflare.com/#workers-kv-namespace-create-a-namespace
-     * @param data The data that will send to Cloudflare
-     * @param data.title A human-readable string name for a Namespace.
+     * @param {object} data - The main data that will send to Cloudflare
+     * @param {string} data.title - A human-readable string name for a Namespace.
      */
     async createNamespace(data) {
         const command = {
@@ -163,8 +163,8 @@ export class WorkersKv {
      * @function removeNamespace
      * @description Deletes the namespace corresponding to the given ID.
      * @see https://api.cloudflare.com/#workers-kv-namespace-remove-a-namespace
-     * @param relativePathParam The parameters in the relative path
-     * @param relativePathParam.namespaceId The namespace identifier
+     * @param {object} relativePathParam - The parameters in the relative path
+     * @param {string} relativePathParam.namespaceId - The namespace identifier
      */
     async removeNamespace(relativePathParam) {
         const command = {
@@ -191,10 +191,10 @@ export class WorkersKv {
      * @function renameNamespace
      * @description - Modifies a namespace's title.
      * @see https://api.cloudflare.com/#workers-kv-namespace-rename-a-namespace
-     * @param relativePathParam The parameters in the relative path
-     * @param relativePathParam.namespaceId - The namespace identifier
-     * @param data - The data that will send to Cloudflare
-     * @param data.title - A human-readable string name for a Namespace.
+     * @param {object} relativePathParam - The parameters in the relative path
+     * @param {string} relativePathParam.namespaceId - The namespace identifier
+     * @param {object} data - The main data that will send to Cloudflare
+     * @param {string} data.title - A human-readable string name for a Namespace.
      */
     async renameNamespace(relativePathParam, data) {
         const command = {
@@ -220,12 +220,12 @@ export class WorkersKv {
      * @async
      * @function listNamespaceKeys
      * @see https://api.cloudflare.com/#workers-kv-namespace-list-a-namespace-s-keys
-     * @param relativePathParam The parameters in the relative path
-     * @param relativePathParam.namespaceId The namespace identifier
-     * @param urlParam The parameters at the end of URL
-     * @param urlParam.limit The number of keys to return. The cursor attribute may be used to iterate over the next batch of keys if there are more than the limit.
-     * @param urlParam.cursor Opaque token indicating the position from which to continue when requesting the next set of records if the amount of list results was limited by the limit parameter. A valid value for the cursor can be obtained from the cursors object in the result_info structure.
-     * @param urlParam.prefix A string prefix used to filter down which keys will be returned. Exact matches and any key names that begin with the prefix will be returned.
+     * @param {object} relativePathParam - The parameters in the relative path
+     * @param {string} relativePathParam.namespaceId - The namespace identifier
+     * @param {object} urlParam - The parameters at the end of URL
+     * @param {number} urlParam.limit - The number of keys to return. The cursor attribute may be used to iterate over the next batch of keys if there are more than the limit.
+     * @param {string} urlParam.cursor - Opaque token indicating the position from which to continue when requesting the next set of records if the amount of list results was limited by the limit parameter. A valid value for the cursor can be obtained from the cursors object in the result_info structure.
+     * @param {string} urlParam.prefix - A string prefix used to filter down which keys will be returned. Exact matches and any key names that begin with the prefix will be returned.
      */
     async listNamespaceKeys(relativePathParam, urlParam) {
         const reqData = urlParam || {};
@@ -258,9 +258,9 @@ export class WorkersKv {
      * @async
      * @function readKeyValuePair
      * @see https://api.cloudflare.com/#workers-kv-namespace-read-key-value-pair
-     * @param relativePathParam The parameters in the relative path
-     * @param relativePathParam.namespaceId The namespace identifier
-     * @param relativePathParam.keyName The name of the key
+     * @param {object} relativePathParam - The parameters in the relative path
+     * @param {string} relativePathParam.namespaceId - The namespace identifier
+     * @param {string} relativePathParam.keyName - The name of the key
      */
     async readKeyValuePair(relativePathParam) {
         const command = {
@@ -287,9 +287,9 @@ export class WorkersKv {
      * @function readKeyMeta
      * @description Returns the metadata associated with the given key in the given namespace. Use URL-encoding to use special characters (e.g. :, !, %) in the key name.
      * @see https://api.cloudflare.com/#workers-kv-namespace-read-the-metadata-for-a-key
-     * @param relativePathParam The parameters in the relative path
-     * @param relativePathParam.namespaceId The namespace identifier
-     * @param relativePathParam.keyName The name of the key
+     * @param {object} relativePathParam - The parameters in the relative path
+     * @param {string} relativePathParam.namespaceId - The namespace identifier
+     * @param {string} relativePathParam.keyName - The name of the key
      */
     async readKeyMeta(relativePathParam) {
         const command = {
@@ -319,6 +319,7 @@ export class WorkersKv {
      * @param {Object} relativePathParam - The parameters in the relative path
      * @param {string} relativePathParam.namespaceId - The namespace identifier
      * @param {string} relativePathParam.keyName - The name of the key
+     * @param {string} value - A UTF-8 encoded string to be stored, up to 10 MB in length.
      * @param {Object} urlParam - The parameters at the end of URL
      * @param {number} urlParam.expiration
      * @param {number} urlParam.expiration_ttl
@@ -355,11 +356,12 @@ export class WorkersKv {
      * @param {object} relativePathParam - The parameters in the relative path
      * @param {string} relativePathParam.namespaceId - The namespace identifier
      * @param {string} relativePathParam.keyName - The name of the key
-     * @param {object} data - The data that will send to Cloudflare
+     * @param {object} data - The main data that will send to Cloudflare
      * @param {string} data.value - A byte sequence to be stored, up to 10 MB in length.
      * @param {object} data.metadata - Arbitrary JSON to be associated with a key/value pair
-     * @param {number} data.expiration
-     * @param {number} data.expiration_ttl
+     * @param {object} urlParam - The parameters at the end of URL
+     * @param {number} urlParam.expiration
+     * @param {number} urlParam.expiration_ttl
      */
     async writeKeyValuePairMeta(relativePathParam, data, urlParam) {
         const customLog = new CustomConsole();

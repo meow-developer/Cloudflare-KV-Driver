@@ -23,18 +23,17 @@ export class CustomConsole {
 export class WorkersKvError extends Error {
     /**
      *
-     * @param title The title of the error
-     * @param msg The short description of the error
-     * @param errDetail The detail of the error
-     * @param params The extra information of the error
+     * @param title - The title of the error
+     * @param msg - The short description of the error
+     * @param errDetail - The detail of the error
+     * @param params - The extra information of the error
      */
-    constructor(title, msg, errDetail, ...params) {
-        super(...params);
+    constructor(title, msg, errDetail) {
+        super(msg);
         if (Error.captureStackTrace) {
             Error.captureStackTrace(this, WorkersKvError);
         }
         this.name = title;
-        this.message = msg;
         this.errDetail = errDetail;
     }
 }
