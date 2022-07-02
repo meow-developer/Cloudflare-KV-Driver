@@ -20,7 +20,7 @@ export class WorkersKv {
         this.write = this.writeKeyValuePair;
         this.delete = this.deleteKeyValuePair;
         if (accountId === undefined || globalApiKey === undefined || accountEmail == undefined) {
-            throw new WorkersKvError("Account Id, Global Api Key and Account Email must not be undefined", "", {});
+            throw new WorkersKvError("Missing Critical Authentication Info", "Account Id, Global Api Key and Account Email must not be undefined", null);
         }
         this.cfAuth = {
             accountId: accountId,
@@ -84,7 +84,7 @@ export class WorkersKv {
                     throw new WorkersKvError(`Failed to ${command}`, "", req.cfRes["errors"]);
                 }
                 else {
-                    throw new WorkersKvError(`Failed to ${command}`, "Cloudflare did not return the error information. Please refer to the raw HTTP response.", req.http);
+                    throw new WorkersKvError(`Failed to ${command}`, "Cloudflare did not return the error information.", req.http);
                 }
             }
             switch (method) {

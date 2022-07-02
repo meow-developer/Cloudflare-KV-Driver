@@ -1,8 +1,7 @@
 import test from 'ava'
 import { WorkersKv } from '../src/index.js'
 import { WorkersKvError } from '../src/util.js'
-
-import { createTempNamespace, removeTempNamespace } from './kvUnit.test.js'
+import { createTempNamespace, removeTempNamespace, genTempDbName } from './temp.js'
 
 const CF_EMAIL = process.env["CF_EMAIL"]
 const CF_ACCOUNT_ID = process.env["CF_ACCOUNT_ID"]
@@ -12,8 +11,9 @@ const cfWorkers = new WorkersKv(CF_EMAIL!, CF_ACCOUNT_ID!, CF_GLOBAL_API_KEY!);
 
 
 const namespaceTest = () => {
-    const namespaceName = "namespaceTest_db1"
+    const namespaceName = genTempDbName(namespaceTest.name)
     let namespaceId: string | null = null
+
     test.serial("Create a namespace - With legit parameters", async t =>{
         const req = await cfWorkers.createNamespace({title: namespaceName})
 
@@ -49,7 +49,7 @@ const namespaceTest = () => {
 
 
 const keyValueTest = async () => {
-    const namespaceName = "keyValueTest"
+    const namespaceName = genTempDbName(keyValueTest.name)
     let namespaceId: string | null = null
 
     const keyName = "testing"
@@ -78,7 +78,7 @@ const keyValueTest = async () => {
 }
 
 const keyValueWithMetaTest = async() => {
-    const namespaceName = "keyValueWithMetaTest"
+    const namespaceName = genTempDbName(keyValueWithMetaTest.name)
     let namespaceId: string | null = null
 
     const keyName = "testingWithMeta"
@@ -101,7 +101,7 @@ const keyValueWithMetaTest = async() => {
 }
 
 const multipleKeyValueTest = async () => {
-    const namespaceName = "multipleKeyValueTest"
+    const namespaceName = genTempDbName(multipleKeyValueTest.name)
     let namespaceId: string | null = null
     const sampleData = [{key: "test1", value: "test1Value"}, {key: "test2", value: "test2Value"}]
     test.before("Create a temp namespace for test purpose", async() => {

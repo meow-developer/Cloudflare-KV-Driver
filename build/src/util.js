@@ -30,9 +30,7 @@ export class WorkersKvError extends Error {
      */
     constructor(title, msg, errDetail) {
         super(msg);
-        if (Error.captureStackTrace) {
-            Error.captureStackTrace(this, WorkersKvError);
-        }
+        Error.captureStackTrace(this, WorkersKvError);
         this.name = title;
         this.errDetail = errDetail;
     }

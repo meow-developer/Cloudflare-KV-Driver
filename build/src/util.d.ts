@@ -21,7 +21,7 @@ export declare class CustomConsole {
 export declare class WorkersKvError extends Error {
     errDetail: {
         [key: string]: any;
-    };
+    } | null;
     /**
      *
      * @param title - The title of the error
@@ -31,5 +31,5 @@ export declare class WorkersKvError extends Error {
      */
     constructor(title: string, msg: string, errDetail: {
         [key: string]: any;
-    });
+    } | null);
 }

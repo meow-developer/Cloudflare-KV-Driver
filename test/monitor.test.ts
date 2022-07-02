@@ -1,7 +1,7 @@
 import test from 'ava'
 import { WorkersKv, WorkersKvMonitor } from '../src/index.js'
 
-import { createTempNamespace, removeTempNamespace } from './kvUnit.test.js'
+import { createTempNamespace, removeTempNamespace, genTempDbName } from './temp.js'
 
 const CF_EMAIL = process.env["CF_EMAIL"]
 const CF_ACCOUNT_ID = process.env["CF_ACCOUNT_ID"]
@@ -12,10 +12,11 @@ const kvMonitor = new WorkersKvMonitor()
 const kvWorkers = new WorkersKv(CF_EMAIL!, CF_ACCOUNT_ID!, CF_GLOBAL_API_KEY!, kvMonitor.dbListener.bind(kvMonitor));
 
 
-const namespaceName = "monitorTest"
+const namespaceName = genTempDbName("Monitor")
 let namespaceId: string | null = null
 const keyName = "monitorTestKey"
 const writeValue = "abc"
+
 test.before("Create a temp namespace for test purpose", async() => {
     namespaceId = await createTempNamespace(namespaceName)
 })

@@ -1,6 +1,6 @@
 import test from 'ava';
 import { WorkersKv } from '../src/index.js';
-import { createTempNamespace, removeTempNamespace } from './kvUnit.test.js';
+import { createTempNamespace, removeTempNamespace } from './temp.test.js';
 const CF_EMAIL = process.env["CF_EMAIL"];
 const CF_ACCOUNT_ID = process.env["CF_ACCOUNT_ID"];
 const CF_GLOBAL_API_KEY = process.env["CF_GLOBAL_API_KEY"];
@@ -100,7 +100,7 @@ const multipleKeyValueTest = async () => {
         await removeTempNamespace(namespaceId);
     });
 };
-namespaceTest();
-keyValueTest();
-keyValueWithMetaTest();
-multipleKeyValueTest();
+/* namespaceTest()
+keyValueTest()
+keyValueWithMetaTest()
+multipleKeyValueTest() */ 

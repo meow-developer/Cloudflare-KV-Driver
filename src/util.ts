@@ -20,7 +20,7 @@ export class CustomConsole{
     ){
         console.warn(chalk.bgYellow.bold( " Warning " ) + " " + title,
                         "\n" + shortDescription,
-                        "\n" + detail)
+                        "\n" + detail);
     }
 
 }
@@ -30,7 +30,7 @@ export class CustomConsole{
  * @description Customize the thrown error class
  */
  export class WorkersKvError extends Error {
-    errDetail: {[key: string]: any}
+    errDetail: {[key: string]: any} | null;
     /**
      * 
      * @param title - The title of the error 
@@ -38,11 +38,11 @@ export class CustomConsole{
      * @param errDetail - The detail of the error
      * @param params - The extra information of the error
      */
-    constructor(title: string, msg: string, errDetail: {[key: string]: any}) {
+    constructor(title: string, msg: string, errDetail: {[key: string]: any} | null) {
         super(msg)
-        if (Error.captureStackTrace) {
-            Error.captureStackTrace(this, WorkersKvError)
-        }
+
+        Error.captureStackTrace(this, WorkersKvError);
+    
         this.name = title;
         this.errDetail = errDetail;
     }

@@ -42,7 +42,8 @@
       "--loader=ts-node/esm"
     ],
     "files": [
-      "test/**/*"
+      "test/**",
+      "!test/temp.ts"
     ]
   },
   "repository": {
