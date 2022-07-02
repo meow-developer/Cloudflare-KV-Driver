@@ -71,7 +71,7 @@ test.serial("Delete a key", async (t) => {
     });
     await kvWorkers.delete({ namespaceId: namespaceId, keyName: keyName });
 });
-test("Remove a non-existent Namespace", async (t) => {
+test("Remove a non-existent namespace", async (t) => {
     const nonExistNamespaceId = "abc";
     t.plan(2);
     kvMonitor.dbMonitorStream().on("error", (msg) => {
