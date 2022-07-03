@@ -213,19 +213,9 @@ export class CfHttpFetch{
      */
      protected isCfResNormal(res: FetchInterfaces.fetchResponse): boolean{
 
-        let isNormal: boolean = res.http.success;
+        let isNormal: boolean;
 
         switch (this.validateCfResponseMethod){
-            case "full":
-                isNormal = typeof(res.cfRes) == "object"
-                if (isNormal){
-                    const cfResKey = Object.keys(res.cfRes!);
-                    isNormal = cfResKey.includes('success') &&
-                                cfResKey.includes('errors') &&
-                                cfResKey.includes('messages') &&
-                                cfResKey.includes('result')
-                }
-                break;
             case "withoutResult":
                 isNormal = typeof(res.cfRes) == "object"
                 if (isNormal){
@@ -237,6 +227,16 @@ export class CfHttpFetch{
                 break;
             case "string":
                 isNormal = typeof(res.cfRes) == "string"
+                break;
+            case "full":
+                isNormal = typeof(res.cfRes) == "object"
+                if (isNormal){
+                    const cfResKey = Object.keys(res.cfRes!);
+                    isNormal = cfResKey.includes('success') &&
+                                cfResKey.includes('errors') &&
+                                cfResKey.includes('messages') &&
+                                cfResKey.includes('result')
+                }
                 break;
 
         }
@@ -250,8 +250,8 @@ export class CfHttpFetch{
      * @param res - The response that's processed by the httpResParser function
      */
     protected isCfSuccess(isCfResNormal: boolean, res: FetchInterfaces.fetchResponse){
-        let isSuccess = false;
-        if (isCfResNormal){
+        let isSuccess = res.http.success;
+        if (isCfResNormal && isSuccess){
             switch (typeof res.cfRes){
                 case 'object':
                     isSuccess = res.cfRes["success"] || false;

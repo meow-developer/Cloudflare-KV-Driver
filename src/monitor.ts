@@ -13,7 +13,7 @@ type dbActivityEventMsg = {
 }
 
 export class WorkersKvMonitor{
-    dbActivityEmitter: EventEmitter
+    private dbActivityEmitter: EventEmitter
     /**
      * @constructor
      * @property {EventEmitter} dbActivityEmitter - An emitter that uses to emit any database activity message
@@ -25,7 +25,7 @@ export class WorkersKvMonitor{
      * @function dbListener
      * @description Receive database activities from the database operation functions
      */
-    dbListener(processSuccess: boolean,
+    public dbListener(processSuccess: boolean,
                 command: WorkersKvInterfaces.bridgeCommand,
                 cfFetch: FetchInterfaces.fetchResponse | null,
                 errDetail: {[key: string]: any} | null){
@@ -45,7 +45,7 @@ export class WorkersKvMonitor{
      * This function can only be executed before the dbListener function is called. Otherwise, no message will be emitted.
      * @returns {EventEmitter} The event emitter that will generate messages in regard to database activities
      */
-    dbMonitorStream(): EventEmitter{
+    public dbMonitorStream(): EventEmitter{
         const monitorEmitter = new EventEmitter();
         
         this.dbActivityEmitter.on("dbActivity", (msg: dbActivityEventMsg)=>{
