@@ -83,6 +83,7 @@ test.serial("Delete a key", async t =>{
 test("Remove a non-existent namespace", async t =>{
     const nonExistNamespaceId = "abc";
     t.plan(2);
+
     kvMonitor.dbMonitorStream().on("error", (msg)=>{
         t.deepEqual(msg.action, {
             commandType: "namespace",
@@ -105,6 +106,7 @@ test("Remove a non-existent namespace", async t =>{
             result: null
         })
     })
+    
     try {
         await kvWorkers.removeNamespace({namespaceId: nonExistNamespaceId});
     } catch {}

@@ -21,14 +21,14 @@ const createNamespace = () => {
 const listNamespaces = () => {
     test("List Namespaces - Without URL parameters", async t =>{
         const req = await cfWorkers.listNamespaces()
-        req.forEach((obj)=>{
+        req.forEach((obj: {[key: string]: any})=>{
             t.deepEqual(Object.keys(obj), ["id", "title", "supports_url_encoding"])
         })
     })
     
     test("List Namespaces - With URL parameters", async t =>{
         const req = await cfWorkers.listNamespaces({direction: "asc"})
-        req.forEach((obj)=>{
+        req.forEach((obj: {[key: string]: any})=>{
             t.deepEqual(Object.keys(obj), ["id", "title", "supports_url_encoding"])
         })
     })
