@@ -5,7 +5,7 @@ import { FetchInterfaces } from './fetch.js';
 /** Local Modules */
 import { EventEmitter } from "node:events";
 export declare class WorkersKvMonitor {
-    dbActivityEmitter: EventEmitter;
+    private dbActivityEmitter;
     /**
      * @constructor
      * @property {EventEmitter} dbActivityEmitter - An emitter that uses to emit any database activity message
