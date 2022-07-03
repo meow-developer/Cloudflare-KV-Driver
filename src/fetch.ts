@@ -270,7 +270,7 @@ export class CfHttpFetch{
      * @function fetch
      * @description Performing and handling the fetch request
      */
-    async fetch(): Promise<FetchInterfaces.ownFetchResponse>{
+    public async fetch(): Promise<FetchInterfaces.ownFetchResponse>{
         try{
             const fetchMaterial = this.contentTypeSwitcher();
             const req = await fetch(fetchMaterial[0], fetchMaterial[1])
