@@ -5,7 +5,7 @@ import { Response } from 'node-fetch/@types/index'
 import { WorkersKvError } from './util.js';
 
 /** Downloaded Modules */
-import fetch, { FormData } from 'node-fetch';
+import fetch, { FormData, RequestInit } from 'node-fetch';
 import { URLSearchParams } from 'url';
 import { serializeError } from 'serialize-error'
 
@@ -42,12 +42,8 @@ export namespace FetchInterfaces {
         isCfNormal: boolean
         isCfReqSuccess: boolean
     }
-    type fetchMaterialBodyHeaders = {
-        method: httpMethod,
-        body: string | FormData | null, 
-        headers: {[key: string]: string}
-    }
-    export type fetchMaterial = [string, fetchMaterialBodyHeaders]
+
+    export type fetchMaterial = [string, RequestInit]
 }
 
 export class CfHttpFetch{
@@ -135,13 +131,17 @@ export class CfHttpFetch{
                 return DEFAULT_PATH + path + "?" + this.genParam()
         }
 
+        const nodeFetchOpt: RequestInit = {
+            method: this.http.method,
+            body: reqBody,
+            headers: { ...headers,  ...DEFAULT_HEADER },
+            redirect: "error",
+            follow: 0
+        }
+
         return [
             fullPath(),
-            {
-                method: this.http.method,
-                body: reqBody,
-                headers: { ...headers,  ...DEFAULT_HEADER }
-            }
+            nodeFetchOpt
         ]
 
 
@@ -250,8 +250,8 @@ export class CfHttpFetch{
      * @param res - The response that's processed by the httpResParser function
      */
     protected isCfSuccess(isCfResNormal: boolean, res: FetchInterfaces.fetchResponse){
-        let isSuccess = res.http.success;
-        if (isCfResNormal && isSuccess){
+        let isSuccess = isCfResNormal && res.http.success;
+        if (isSuccess){
             switch (typeof res.cfRes){
                 case 'object':
                     isSuccess = res.cfRes["success"] || false;

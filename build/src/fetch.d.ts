@@ -1,4 +1,6 @@
 /// <reference types="node" />
+/** Downloaded Modules */
+import { RequestInit } from 'node-fetch';
 export declare namespace FetchInterfaces {
     export interface fetchResponse {
         http: {
@@ -31,14 +33,7 @@ export declare namespace FetchInterfaces {
         isCfNormal: boolean;
         isCfReqSuccess: boolean;
     }
-    type fetchMaterialBodyHeaders = {
-        method: httpMethod;
-        body: string | FormData | null;
-        headers: {
-            [key: string]: string;
-        };
-    };
-    export type fetchMaterial = [string, fetchMaterialBodyHeaders];
+    export type fetchMaterial = [string, RequestInit];
     export {};
 }
 export declare class CfHttpFetch {

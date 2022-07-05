@@ -66,13 +66,16 @@ export class CfHttpFetch {
             else
                 return DEFAULT_PATH + path + "?" + this.genParam();
         };
+        const nodeFetchOpt = {
+            method: this.http.method,
+            body: reqBody,
+            headers: { ...headers, ...DEFAULT_HEADER },
+            redirect: "error",
+            follow: 0
+        };
         return [
             fullPath(),
-            {
-                method: this.http.method,
-                body: reqBody,
-                headers: { ...headers, ...DEFAULT_HEADER }
-            }
+            nodeFetchOpt
         ];
     }
     /**
@@ -164,8 +167,8 @@ export class CfHttpFetch {
      * @param res - The response that's processed by the httpResParser function
      */
     isCfSuccess(isCfResNormal, res) {
-        let isSuccess = res.http.success;
-        if (isCfResNormal && isSuccess) {
+        let isSuccess = isCfResNormal && res.http.success;
+        if (isSuccess) {
             switch (typeof res.cfRes) {
                 case 'object':
                     isSuccess = res.cfRes["success"] || false;
