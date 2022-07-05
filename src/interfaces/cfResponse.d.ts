@@ -13,7 +13,7 @@ export namespace CloudflareResponseInterfaces {
 
     interface createNamespace extends listNamespaces {}
     
-    interface listNamespaceKeys extends generalResponse["result"]{
+    interface listNamespaceKeys{
         result: Array<[
             {
               name: string,
