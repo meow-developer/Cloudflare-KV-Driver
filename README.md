@@ -74,7 +74,7 @@ await workersKv.renameNamespace({namespaceId: "namespaceId"},
 				{title: "title"}) //The new namespace name
 ```
 
-### List a Namespace's Keys
+### List Namespace's Keys
 
 ```js
 await workersKv.listNamespaceKeys({namespaceId: "namespaceId"})
@@ -93,7 +93,7 @@ workersKv.listNamespaceKeys(
 )
 ```
 
-### Read key-value pair
+### Read a key-value pair
 
 ```js
 await workersKv.readKeyValuePair({
@@ -116,7 +116,7 @@ await workersKv.readKeyMeta({
 })
 ```
 
-### Write key-value pair
+### Write a key-value pair
 
 ```js
 await workersKv.writeKeyValuePair({
@@ -144,7 +144,7 @@ workersKv.writeKeyValuePair(
 )
 ```
 
-### Write key-value pair with metadata
+### Write a key-value pair with metadata
 
 ```js
 await workersKv.writeKeyValuePairMeta({
@@ -200,7 +200,7 @@ workersKv.writeMultipleKeyValuePairs(
     )
 ```
 
-### Delete key-value pair
+### Delete a key-value pair
 
 ```js
 await workersKv.deleteKeyValuePair({
