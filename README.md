@@ -107,7 +107,7 @@ await workersKv.read({
 })
 ```
 
-### Read the metadata for a key
+### Read the metadata of a key
 
 ```js
 await workersKv.readKeyMeta({
