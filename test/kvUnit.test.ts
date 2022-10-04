@@ -45,7 +45,7 @@ const listNamespaceKeys = () => {
         namespaceId = await createTempNamespace(namespaceName)
     })
     test("List a namespace's keys - Without URL parameters", async t => {
-        const req = await cfWorkers.listNamespaceKeys({namespaceId: namespaceId!})
+        const req = await cfWorkers.listNamespaceKeys({namespaceId: namespaceId!});
 
         t.deepEqual(Object.keys(req), ["result", "result_info"])
 
@@ -57,7 +57,7 @@ const listNamespaceKeys = () => {
     })
 
     test("List a namespace's keys - With URL parameters", async t => {
-        const req = await cfWorkers.listNamespaceKeys({namespaceId: namespaceId!}, {limit: 50})
+        const req = await cfWorkers.listNamespaceKeys({namespaceId: namespaceId!}, {limit: 50});
 
         t.deepEqual(Object.keys(req), ["result", "result_info"])
 
@@ -67,6 +67,7 @@ const listNamespaceKeys = () => {
 
         t.deepEqual(Object.keys(req.result_info), ["count", "cursor"])
     })
+
     test.after("Remove the temp namespace", async() => {
         await removeTempNamespace(namespaceId!)
     })

@@ -48,6 +48,16 @@ await workersKv.write({
 await workersKv.listNamespaceKeys({namespaceId: "namespaceId"})
 ```
 
+```js
+//Example return:
+{
+  result: [
+    { name: 'key1' },
+    { name: "key2" },
+  ],
+  result_info: { count: 2, cursor: '' }
+}
+```
 
 ### Read a key-value pair
 
@@ -63,8 +73,9 @@ await workersKv.read({
 })
 ```
 
-```
-Example return: "abc" //The value of the key in string type
+```js
+//Example return:
+"abc" //The value of the key in string type
 ```
 
 
@@ -82,8 +93,9 @@ await workersKv.write({
 }, "value")
 ```
 
-```
-Example return: True //Indicating that the key is successfully modified/ added.
+```js
+//Example return:
+True //Indicating that the key is successfully modified/ added.
 ```
 
 ### Write multiple key-value pairs
@@ -97,8 +109,9 @@ await workersKv.writeMultipleKeyValuePairs({
 }, data)
 ```
 
-```
-Example return: True //Indicating that the keys are successfully modified/ added.
+```js
+//Example return:
+True //Indicating that the keys are successfully modified/ added.
 ```
 
 ### Delete a key-value pair
@@ -115,8 +128,9 @@ await workersKv.delete({
 })
 ```
 
-```
-Example return: True //Indicating that the keys is successfully removed.
+```js
+//Example return:
+True //Indicating that the keys is successfully removed.
 ```
 
 ## Documentation
@@ -126,6 +140,7 @@ The website listed all other methods that you can use, as well as their return t
 
 
 ## Monitoring Device
+It is used to monitor the database operation that is executed.
 
 ```js
 import { WorkersKv, WorkersKvMonitor } from  'cf-kv-driver'
@@ -206,9 +221,9 @@ kvMonitor.dbMonitorStream().on("err", (msg)=>{
 
 #### Unknown events
  
-It is super rare that there is an 'unknown' event. Only when Cloudflare responds with something that is unusual, for example the response body is not in the expected format but the status code represents success or failure, and the program does not know whether the database operation is performed successfully will lead the event emitter to emit an 'unknown' event.
+It is super rare that there is an 'unknown' event. Only when Cloudflare responds with something that is unusual, for example, the response body is not in the expected format but the status code represents success or failure, and the program does not know whether the database operation is performed successfully will lead the event emitter to emit an 'unknown' event.
 
-The message of an unknown event is the same the message of a failed event, containing the 'errorDetail'.
+The message of an unknown event is the same as the message of a failed event, containing an 'errorDetail'.
  
 ```js
 kvMonitor.dbMonitorStream().on("unknown", (msg)=>{
