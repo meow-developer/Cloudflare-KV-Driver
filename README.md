@@ -3,7 +3,7 @@
 An unofficial Cloudflare Kv Node.js Driver
 
 ## Highlights
-- All Workers Kv methods on Cloudflare website are included
+- All Workers Kv methods on the Cloudflare website are included
 - Expressive API
 - [Detailed documentation](#documentation)
 - [Built-in monitoring device that monitors database activities](#monitoring-device)
