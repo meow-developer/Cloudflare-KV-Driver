@@ -150,7 +150,13 @@ const workersKv  = new WorkersKv(
 	process.env["CF_EMAIL"],
 	process.env["CF_ACCOUNT_ID"],
 	process.env["CF_GLOBAL_API_KEY"],
-	true, //Enforcing to do validity check on Cloudflare response
+	/**
+	 * Validity check
+	 * By default, the value is true.
+	 * It is used to validate whether the response body from Cloudflare is in the expected format.
+	 * It is recommended to leave this on.
+	 **/
+	true, 
 	kvMonitor.dbListener.bind(kvMonitor) //Binding a database event listener to the driver
 )
 ```
