@@ -221,7 +221,9 @@ kvMonitor.dbMonitorStream().on("err", (msg)=>{
 
 #### Unknown events
  
-It is super rare that there is an 'unknown' event. Only when Cloudflare responds with something that is unusual, for example, the response body is not in the expected format but the status code represents success or failure, and the program does not know whether the database operation is performed successfully will lead the event emitter to emit an 'unknown' event.
+It is super rare that there is an 'unknown' event. Only when Cloudflare responds with something that is unusual, for example, the response body is not in the expected format but the HTTP status code represents success or failure, and the program does not want to determine whether the database operation is performed successfully purely based the status code will lead the event emitter to emit an 'unknown' event.
+
+The unknown event will only be emitted when the validity check of Cloudflare responses is set to true. (It is true by default.)
 
 The message of an unknown event is the same as the message of a failed event, containing an 'errorDetail'.
  
