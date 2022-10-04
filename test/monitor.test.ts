@@ -12,6 +12,7 @@ const CF_GLOBAL_API_KEY = process.env["CF_GLOBAL_API_KEY"]
 const kvMonitor = new WorkersKvMonitor()
 const kvWorkers = new WorkersKv(CF_EMAIL!, CF_ACCOUNT_ID!, CF_GLOBAL_API_KEY!, true, kvMonitor.dbListener.bind(kvMonitor));
 
+import util from 'node:util'
 
 const namespaceName = genTempDbName("Monitor")
 let namespaceId: string | null = null

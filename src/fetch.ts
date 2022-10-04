@@ -248,7 +248,7 @@ export class CfHttpFetch{
      * @returns {boolean} True when the db operation has been performed successfully; and vice versa.
      */
     protected isCfSuccess(isCfResNormal: boolean | null, res: FetchInterfaces.FetchResponse){
-        let isSuccess: boolean | null = !isCfResNormal ? false : res.http.success;
+        let isSuccess: boolean | null = isCfResNormal == false ? null : res.http.success;
 
         if (isSuccess){
             switch (res.httpResShortenContentType){

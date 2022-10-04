@@ -72,7 +72,7 @@ export declare class CfHttpFetch {
      * @param res The response that stores information about the HTTP request, database operation perform status, and other Cloudflare responses
      * @returns {boolean} True when the db operation has been performed successfully; and vice versa.
      */
-    protected isCfSuccess(isCfResNormal: boolean | null, res: FetchInterfaces.FetchResponse): boolean;
+    protected isCfSuccess(isCfResNormal: boolean | null, res: FetchInterfaces.FetchResponse): boolean | null;
     /**
      * Parsing error message from the Cloudflare response
      * @protected

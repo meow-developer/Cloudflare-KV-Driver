@@ -3,6 +3,7 @@
 An unofficial Cloudflare Kv Node.js Driver
 
 ## Highlights
+- All Workers Kv methods on Cloudflare website are included
 - Expressive API
 - [Detailed documentation](#documentation)
 - [Built-in monitoring device that monitors database activities](#monitoring-device)
@@ -62,6 +63,10 @@ await workersKv.read({
 })
 ```
 
+```
+Example return: "abc" //The value of the key in string type
+```
+
 
 ### Write a key-value pair
 
@@ -77,7 +82,9 @@ await workersKv.write({
 }, "value")
 ```
 
-
+```
+Example return: True //Indicating that the key is successfully modified/ added.
+```
 
 ### Write multiple key-value pairs
 
@@ -88,6 +95,10 @@ const data = [{key: "key1", value: "value1"},
 await workersKv.writeMultipleKeyValuePairs({
             namespaceId: string,
 }, data)
+```
+
+```
+Example return: True //Indicating that the keys are successfully modified/ added.
 ```
 
 ### Delete a key-value pair
@@ -103,8 +114,15 @@ await workersKv.delete({
 	keyName: "namespaceId"
 })
 ```
+
+```
+Example return: True //Indicating that the keys is successfully removed.
+```
+
 ## Documentation
-A comprehensive documentation is on [https://kv-driver.pages.dev/](https://kv-driver.pages.dev/)
+A comprehensive documentation is on [https://kv-driver.pages.dev/](https://kv-driver.pages.dev/).
+
+The website listed all other methods that you can use, as well as their return types.
 
 
 ## Monitoring Device
@@ -128,7 +146,7 @@ const workersKv  = new WorkersKv(
 | action | The requested database operation |
 | cfResponse | The response from Cloudflare
 
-### Monitoring succeeded events
+### Successful events
 
 ```js
 kvMonitor.dbMonitorStream().on("success", (msg)=>{
@@ -140,12 +158,41 @@ await workersKv.write({
 	keyName: "keyName"
 }, "value")
 ```
+
+```js
+//Example output: 
+
+{
+  timestamp: 2022-10-04T03:29:20.328Z, 
+  action: {
+    commandType: 'CRUD',
+    command: 'Write key-value pair',
+    input: {
+      relativePathParam: {
+        namespaceId: 'f4e89231ab0diwhi3511g4',
+        keyName: 'keyName'
+      },
+      urlParam: {},
+      data: { value: 'value' }
+    }
+  },
+  cfResponse: {
+    isCfNormal: true,
+    isCfReqSuccess: true,
+    cfError: [],
+    http: {}, //The object here contains HTTP response body, status code, and headers.
+    httpResShortenContentType: 'object',
+    cfRes: { result: null, success: true, errors: [], messages: [] }
+  }
+}
+```
+
 **:warning: Warning**
 The monitoring device will only generate event messages if it's executed before the database operation function is executed.
 
-### Monitoring failed events
+### Failed events
  
- Except for the normal properties listed above, a failed event message also contains the following properties
+ Except for the normal properties listed above, the message of a failed event also contains the following properties
  
  | Properties | Description |
  | -- | -- |
@@ -153,6 +200,18 @@ The monitoring device will only generate event messages if it's executed before 
  
 ```js
 kvMonitor.dbMonitorStream().on("err", (msg)=>{
+	console.log(msg)
+})
+```
+
+#### Unknown events
+ 
+It is super rare that there is an 'unknown' event. Only when Cloudflare responds with something that is unusual, for example the response body is not in the expected format but the status code represents success or failure, and the program does not know whether the database operation is performed successfully will lead the event emitter to emit an 'unknown' event.
+
+The message of an unknown event is the same the message of a failed event, containing the 'errorDetail'.
+ 
+```js
+kvMonitor.dbMonitorStream().on("unknown", (msg)=>{
 	console.log(msg)
 })
 ```
