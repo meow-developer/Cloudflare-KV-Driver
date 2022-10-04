@@ -1,41 +1,9 @@
-/// <reference types="node" />
-/** Downloaded Modules */
-import { RequestInit } from 'node-fetch';
-export declare namespace FetchInterfaces {
-    export interface fetchResponse {
-        http: {
-            body: NodeJS.ReadableStream | null;
-            success: boolean;
-            statusCode: number;
-            headers: Headers;
-        };
-        cfRes: any;
-    }
-    /**
-     * @property {type} httpMethod
-     * @description The http request method that can be performed
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
-     */
-    type httpMethod = "GET" | "POST" | "DELETE" | "PATCH" | "PUT";
-    type httpContentType = "none" | "json" | "plainText" | "formData";
-    export type httpFetchOptions = {
-        method: httpMethod;
-        path: string;
-        params: {
-            [key: string]: any;
-        } | null;
-        body: {
-            [key: string]: any;
-        } | string | null;
-        contentType: httpContentType;
-    };
-    export interface ownFetchResponse extends fetchResponse {
-        isCfNormal: boolean;
-        isCfReqSuccess: boolean;
-    }
-    export type fetchMaterial = [string, RequestInit];
-    export {};
-}
+import { FetchInterfaces } from './interfaces/fetch.js';
+import { CloudflareResponseInterfaces } from './interfaces/cfResponse.js';
+/**
+ * Fetch responses from Cloudflare
+ * @class
+ */
 export declare class CfHttpFetch {
     cfAuth: {
         accountEmail: string;
@@ -43,12 +11,12 @@ export declare class CfHttpFetch {
         globalApiKey: string;
     };
     http: FetchInterfaces.httpFetchOptions;
-    validateCfResponseMethod: "string" | "full" | "withoutResult";
+    validateCfResponseMethod: "string" | "full" | "withoutResult" | false;
     /**
      * @constructor
-     * @param {Object} cfAuth - The authentication information that used to access the Cloudflare KV service
-     * @param {Object} http - The HTTP request information
-     * @param {string} validateCfResponseMethod - The method that used to validate the response from Cloudflare
+     * @param {Object} cfAuth The authentication information that is used to access the Cloudflare KV service
+     * @param {Object} http HTTP request information for database operations.
+     * @param {string} validateCfResponseMethod The method that used to validate the response from Cloudflare
      */
     constructor(cfAuth: {
         accountEmail: string;
@@ -60,51 +28,64 @@ export declare class CfHttpFetch {
         params: FetchInterfaces.httpFetchOptions["params"];
         body: FetchInterfaces.httpFetchOptions["body"];
         contentType: FetchInterfaces.httpFetchOptions["contentType"];
-    }, validateCfResponseMethod?: "string" | "full" | "withoutResult");
+    }, validateCfResponseMethod?: "string" | "full" | "withoutResult" | false);
     /**
+     * Converting URL parameters into a suitable format for performing a HTTP request
      * @function genParam
      * @private
-     * @description Converting the URL parameters into a suitable format
-     * @returns {Object} - The URL format parameters
+     * @returns {Object} Formatted URL parameters
      */
     private genParam;
     /**
+     * Generating a fetch request based on the request path, body, headers, and http method
      * @function genFetch
-     * @description Generate the fetch request based on the request path, body, headers, and http method
-     * @param reqBody - The HTTP request body
-     * @param headers - The HTTP request headers
-     * @returns {Array} - The materials that can be used to make the fetch request for the NodeFetch module
+     * @description
+     * @param reqBody The HTTP request body
+     * @param headers The HTTP request headers
+     * @returns {Array} A full endpoint URL path and a configuration for the NodeFetch module
      */
     private genFetch;
     /**
+     * Generating a suitable HTTP request based on the content type
      * @function contentTypeSwitcher
-     * @description Generate a suitable HTTP request data based on the content type
-     * @returns - The materials that can be used to make the fetch request for the NodeFetch module
+     * @returns {Array} Materials that can be used to perform the a request for the NodeFetch module
      */
     private contentTypeSwitcher;
     /**
+     * Parsing the HTTP response that's sent from Cloudflare
      * @function httpResParser
-     * @description Parsing the HTTP response that's sent from Cloudflare
-     * @param httpRes - The HTTP response from Cloudflare that's processed by the NodeFetch module
+     * @param {Response} httpRes A HTTP response from Cloudflare that's processed by the NodeFetch module
+     * @returns {Object} A full information about the HTTP request, database operation perform status, and other Cloudflare responses.
      */
     private httpResParser;
     /**
+     * Checking whether the content of the response from Cloudflare is normal
      * @function isCfResNormal
-     * @description Checking whether the content of the response from Cloudflare is normal
-     * @param {object} res - The response that's processed by the httpResParser function
+     * @param {object} res The response that's processed by the httpResParser function
+     * @returns {boolean} True when the response is normal, false otherwise.
      */
-    protected isCfResNormal(res: FetchInterfaces.fetchResponse): boolean;
+    protected isCfResNormal(res: FetchInterfaces.FetchResponse): boolean;
     /**
+     * Checking whether the database operation has been performed successfully
      * @function isCfSuccess
-     * @description Checking whether the database operation has been performed successfully
-     * @param {boolean} isCfResNormal - The value indicates whether the Cloudflare response is normal
-     * @param res - The response that's processed by the httpResParser function
+     * @param {boolean} isCfResNormal The value indicates whether the Cloudflare response is normal
+     * @param res The response that stores information about the HTTP request, database operation perform status, and other Cloudflare responses
+     * @returns {boolean} True when the db operation has been performed successfully; and vice versa.
      */
-    protected isCfSuccess(isCfResNormal: boolean, res: FetchInterfaces.fetchResponse): boolean;
+    protected isCfSuccess(isCfResNormal: boolean | null, res: FetchInterfaces.FetchResponse): boolean;
     /**
+     * Parsing error message from the Cloudflare response
+     * @protected
+     * @function cfError
+     * @returns {(null|CloudflareResponseInterfaces.GeneralResponse["errors"])} null when there's no error; The error received from Cloudflare about the database operation request.
+     */
+    protected cfError(res: FetchInterfaces.FetchResponse): CloudflareResponseInterfaces.GeneralResponse["errors"] | null;
+    /**
+     * Performing and handling the fetch request
      * @async
      * @function fetch
-     * @description Performing and handling the fetch request
+     * @returns {OwnFetchResponse} A full information about the HTTP request, database operation perform status, and other Cloudflare responses
+     * @throws {WorkersKvError}
      */
-    fetch(): Promise<FetchInterfaces.ownFetchResponse>;
+    fetch(): Promise<FetchInterfaces.OwnFetchResponse>;
 }

@@ -10,5 +10,19 @@ export const removeTempNamespace = async (namespaceId) => {
     await cfWorkers.removeNamespace({ namespaceId: namespaceId });
 };
 export const genTempDbName = (testName) => {
-    return `TestDb_${testName}`;
+    return `_KvDriverTest_${testName}`;
+};
+export const promisifyMonitorStream = (kvMonitor, eventType, timeout, dbOperation) => {
+    return new Promise(async (resolve, reject) => {
+        kvMonitor.dbMonitorStream().on(eventType, (msg) => {
+            setTimeout(() => {
+                reject("Timeout");
+            }, timeout);
+            resolve(msg);
+        });
+        try {
+            await dbOperation.func(...dbOperation.params);
+        }
+        catch { } //It does not matter if the dbOperation throws an exception
+    });
 };

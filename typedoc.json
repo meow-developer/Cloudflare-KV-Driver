@@ -1,0 +1,13 @@
+{
+    "name": "Cloudflare KV Driver",
+    "entryPoints": ["./src/index.ts"],
+    "out": "docs",
+    "darkHighlightTheme": "dark-plus",
+    "readme": "none",
+    "hideGenerator": true,
+    "visibilityFilters": {
+        "protected": true,
+        "private": false,
+        "inherited": true
+    }
+}

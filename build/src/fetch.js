@@ -6,12 +6,16 @@ import { URLSearchParams } from 'url';
 import { serializeError } from 'serialize-error';
 const CF_API_ENDPOINT = "https://api.cloudflare.com/client/v4";
 const CF_KV_API_PATH = "storage/kv";
+/**
+ * Fetch responses from Cloudflare
+ * @class
+ */
 export class CfHttpFetch {
     /**
      * @constructor
-     * @param {Object} cfAuth - The authentication information that used to access the Cloudflare KV service
-     * @param {Object} http - The HTTP request information
-     * @param {string} validateCfResponseMethod - The method that used to validate the response from Cloudflare
+     * @param {Object} cfAuth The authentication information that is used to access the Cloudflare KV service
+     * @param {Object} http HTTP request information for database operations.
+     * @param {string} validateCfResponseMethod The method that used to validate the response from Cloudflare
      */
     constructor(cfAuth, http, validateCfResponseMethod = "full") {
         this.cfAuth = {
@@ -29,10 +33,10 @@ export class CfHttpFetch {
         this.validateCfResponseMethod = validateCfResponseMethod;
     }
     /**
+     * Converting URL parameters into a suitable format for performing a HTTP request
      * @function genParam
      * @private
-     * @description Converting the URL parameters into a suitable format
-     * @returns {Object} - The URL format parameters
+     * @returns {Object} Formatted URL parameters
      */
     genParam() {
         const params = this.http.params;
@@ -46,11 +50,12 @@ export class CfHttpFetch {
         return formattedParams;
     }
     /**
+     * Generating a fetch request based on the request path, body, headers, and http method
      * @function genFetch
-     * @description Generate the fetch request based on the request path, body, headers, and http method
-     * @param reqBody - The HTTP request body
-     * @param headers - The HTTP request headers
-     * @returns {Array} - The materials that can be used to make the fetch request for the NodeFetch module
+     * @description
+     * @param reqBody The HTTP request body
+     * @param headers The HTTP request headers
+     * @returns {Array} A full endpoint URL path and a configuration for the NodeFetch module
      */
     genFetch(reqBody, headers = {}) {
         const DEFAULT_PATH = `${CF_API_ENDPOINT}/accounts/${this.cfAuth.accountId}/${CF_KV_API_PATH}/`;
@@ -79,9 +84,9 @@ export class CfHttpFetch {
         ];
     }
     /**
+     * Generating a suitable HTTP request based on the content type
      * @function contentTypeSwitcher
-     * @description Generate a suitable HTTP request data based on the content type
-     * @returns - The materials that can be used to make the fetch request for the NodeFetch module
+     * @returns {Array} Materials that can be used to perform the a request for the NodeFetch module
      */
     contentTypeSwitcher() {
         let fetchMaterial;
@@ -112,91 +117,127 @@ export class CfHttpFetch {
         return fetchMaterial;
     }
     /**
+     * Parsing the HTTP response that's sent from Cloudflare
      * @function httpResParser
-     * @description Parsing the HTTP response that's sent from Cloudflare
-     * @param httpRes - The HTTP response from Cloudflare that's processed by the NodeFetch module
+     * @param {Response} httpRes A HTTP response from Cloudflare that's processed by the NodeFetch module
+     * @returns {Object} A full information about the HTTP request, database operation perform status, and other Cloudflare responses.
      */
     async httpResParser(httpRes) {
-        return {
-            http: {
-                body: httpRes.body,
-                success: httpRes.ok,
-                statusCode: httpRes.status,
-                headers: httpRes.headers
-            },
-            cfRes: await httpRes.json()
+        let cfRes;
+        const RES_CONTENT_TYPE = httpRes.headers.get("Content-Type");
+        const ACCEPTABLE_CONTENT_TYPES = ["application/json; charset=UTF-8", "application/octet-stream"];
+        const CONVERT_TO_SHORTEN_TYPES = ["object", "string"];
+        const RES_SHORTEN_CONTENT_TYPE = CONVERT_TO_SHORTEN_TYPES[ACCEPTABLE_CONTENT_TYPES.indexOf(RES_CONTENT_TYPE)];
+        const http = {
+            body: httpRes.body,
+            success: httpRes.ok,
+            statusCode: httpRes.status,
+            headers: httpRes.headers
         };
+        switch (RES_SHORTEN_CONTENT_TYPE) {
+            case "object":
+                cfRes = await httpRes.json();
+                break;
+            case "string":
+                const temp = await httpRes.text();
+                cfRes = temp.substring(1, temp.length - 1);
+                break;
+            default:
+                throw new WorkersKvError("Receive an unforeseen response type from Cf", "Please refer to the content type of the response", { "contentType": RES_CONTENT_TYPE });
+        }
+        return { http: http, httpResShortenContentType: RES_SHORTEN_CONTENT_TYPE, cfRes: cfRes };
     }
     /**
+     * Checking whether the content of the response from Cloudflare is normal
      * @function isCfResNormal
-     * @description Checking whether the content of the response from Cloudflare is normal
-     * @param {object} res - The response that's processed by the httpResParser function
+     * @param {object} res The response that's processed by the httpResParser function
+     * @returns {boolean} True when the response is normal, false otherwise.
      */
     isCfResNormal(res) {
-        let isNormal;
+        const GENERAL_CF_OBJ_EXPECTED_KEYS = ["success", "errors", "messages"];
+        let isNormal = false;
         switch (this.validateCfResponseMethod) {
             case "withoutResult":
-                isNormal = typeof (res.cfRes) == "object";
+                isNormal = res.httpResShortenContentType == "object";
                 if (isNormal) {
                     const cfResKey = Object.keys(res.cfRes);
-                    isNormal = cfResKey.includes('success') &&
-                        cfResKey.includes('errors') &&
-                        cfResKey.includes('messages');
+                    GENERAL_CF_OBJ_EXPECTED_KEYS.map((value) => {
+                        isNormal = isNormal && cfResKey.includes(value);
+                    });
                 }
                 break;
             case "string":
-                isNormal = typeof (res.cfRes) == "string";
+                isNormal = res.httpResShortenContentType == "string";
                 break;
             case "full":
-                isNormal = typeof (res.cfRes) == "object";
+                isNormal = res.httpResShortenContentType == "object";
                 if (isNormal) {
                     const cfResKey = Object.keys(res.cfRes);
-                    isNormal = cfResKey.includes('success') &&
-                        cfResKey.includes('errors') &&
-                        cfResKey.includes('messages') &&
-                        cfResKey.includes('result');
+                    ["result", ...GENERAL_CF_OBJ_EXPECTED_KEYS].map((value) => {
+                        isNormal = isNormal && cfResKey.includes(value);
+                    });
                 }
                 break;
         }
         return isNormal;
     }
     /**
+     * Checking whether the database operation has been performed successfully
      * @function isCfSuccess
-     * @description Checking whether the database operation has been performed successfully
-     * @param {boolean} isCfResNormal - The value indicates whether the Cloudflare response is normal
-     * @param res - The response that's processed by the httpResParser function
+     * @param {boolean} isCfResNormal The value indicates whether the Cloudflare response is normal
+     * @param res The response that stores information about the HTTP request, database operation perform status, and other Cloudflare responses
+     * @returns {boolean} True when the db operation has been performed successfully; and vice versa.
      */
     isCfSuccess(isCfResNormal, res) {
-        let isSuccess = isCfResNormal && res.http.success;
+        let isSuccess = !isCfResNormal ? false : res.http.success;
         if (isSuccess) {
-            switch (typeof res.cfRes) {
-                case 'object':
+            switch (res.httpResShortenContentType) {
+                case "object":
                     isSuccess = res.cfRes["success"] || false;
                     break;
                 case "string":
                     isSuccess = true;
                     break;
-                default:
-                    isSuccess = false;
             }
         }
         return isSuccess;
     }
     /**
+     * Parsing error message from the Cloudflare response
+     * @protected
+     * @function cfError
+     * @returns {(null|CloudflareResponseInterfaces.GeneralResponse["errors"])} null when there's no error; The error received from Cloudflare about the database operation request.
+     */
+    cfError(res) {
+        if (res.httpResShortenContentType === "string") {
+            return null;
+        }
+        else {
+            return res.cfRes["errors"];
+        }
+    }
+    /**
+     * Performing and handling the fetch request
      * @async
      * @function fetch
-     * @description Performing and handling the fetch request
+     * @returns {OwnFetchResponse} A full information about the HTTP request, database operation perform status, and other Cloudflare responses
+     * @throws {WorkersKvError}
      */
     async fetch() {
         try {
             const fetchMaterial = this.contentTypeSwitcher();
             const req = await fetch(fetchMaterial[0], fetchMaterial[1]);
             const formattedRes = await this.httpResParser(req);
-            const isCfNormal = this.isCfResNormal(formattedRes);
+            //Null means whether the Cf response is normal is uncertain 
+            let isCfNormal = null;
+            if (this.validateCfResponseMethod)
+                isCfNormal = this.isCfResNormal(formattedRes);
             const isCfReqSuccess = this.isCfSuccess(isCfNormal, formattedRes);
+            const cfError = this.cfError(formattedRes);
             return {
                 isCfNormal: isCfNormal,
                 isCfReqSuccess: isCfReqSuccess,
+                cfError: cfError,
                 ...formattedRes
             };
         }

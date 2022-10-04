@@ -1,4 +1,5 @@
-import { WorkersKv } from '../src/index.js'
+import { WorkersKv, WorkersKvMonitor } from '../src/index.js'
+import { DbEventEmit } from '../src/interfaces/monitorEvent.js';
 
 const CF_EMAIL = process.env["CF_EMAIL"]
 const CF_ACCOUNT_ID = process.env["CF_ACCOUNT_ID"]
@@ -15,5 +16,28 @@ export const removeTempNamespace = async (namespaceId: string) => {
 }
 
 export const genTempDbName = (testName: string) => {
-    return `TestDb_${testName}`
+    return `_KvDriverTest_${testName}`
+}
+
+
+export const promisifyMonitorStream = (
+    kvMonitor: WorkersKvMonitor, 
+    eventType: "success" | "err", 
+    timeout: number, 
+    dbOperation: {
+        func: Function,
+        params: Array<any>
+    }) => {
+    return new Promise<DbEventEmit.ActivityMsg>(async (resolve, reject) => {
+        kvMonitor.dbMonitorStream().on(eventType, (msg: DbEventEmit.ActivityMsg)=>{
+            setTimeout(()=>{
+                reject("Timeout")
+            }, timeout);
+            resolve(msg);
+        })
+        try{
+            await dbOperation.func(...dbOperation.params);
+        } catch {} //It does not matter if the dbOperation throws an exception
+
+    })
 }
