@@ -21,7 +21,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">WorkersKv</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/aa1c7d5/src/workersKv.ts#L17">workersKv.ts:17</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/9ba2a33/src/workersKv.ts#L17">workersKv.ts:17</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -95,7 +95,7 @@
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="WorkersKv.html" class="tsd-signature-type" data-tsd-kind="Class">WorkersKv</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/aa1c7d5/src/workersKv.ts#L38">workersKv.ts:38</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/9ba2a33/src/workersKv.ts#L38">workersKv.ts:38</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private"><a id="cfAuth" class="tsd-anchor"></a>
@@ -111,7 +111,7 @@
 <li class="tsd-parameter">
 <h5>global<wbr/>Api<wbr/>Key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5></li></ul></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/aa1c7d5/src/workersKv.ts#L18">workersKv.ts:18</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/9ba2a33/src/workersKv.ts#L18">workersKv.ts:18</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="delete" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>delete</span><a href="#delete" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">delete<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>relativePathParam<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>keyName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>namespaceId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> = ...</span></div>
@@ -130,6 +130,8 @@
 <h3>See</h3><p><a href="https://api.cloudflare.com/#workers-kv-namespace-delete-key-value-pair">https://api.cloudflare.com/#workers-kv-namespace-delete-key-value-pair</a></p>
 
 <h3>Returns</h3><p>True if the key is successfully removed, false otherwise.</p>
+
+<h3>Throws</h3><p>The Kv operation request is failed.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -149,17 +151,17 @@
 </div></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4></li></ul></li></ul></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/aa1c7d5/src/workersKv.ts#L729">workersKv.ts:729</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/9ba2a33/src/workersKv.ts#L742">workersKv.ts:742</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private"><a id="extensionArg" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>extension<wbr/>Arg</span><a href="#extensionArg" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">extension<wbr/>Arg<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">[]</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/aa1c7d5/src/workersKv.ts#L23">workersKv.ts:23</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/9ba2a33/src/workersKv.ts#L23">workersKv.ts:23</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private"><a id="isValidateCfResponse" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>is<wbr/>Validate<wbr/>Cf<wbr/>Response</span><a href="#isValidateCfResponse" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">is<wbr/>Validate<wbr/>Cf<wbr/>Response<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/aa1c7d5/src/workersKv.ts#L24">workersKv.ts:24</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/9ba2a33/src/workersKv.ts#L24">workersKv.ts:24</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="read" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>read</span><a href="#read" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">read<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>relativePathParam<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>keyName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>namespaceId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> = ...</span></div>
@@ -180,6 +182,8 @@ If the KV-pair is set to expire at some point, the expiration time as measured i
 <h3>See</h3><p><a href="https://api.cloudflare.com/#workers-kv-namespace-read-key-value-pair">https://api.cloudflare.com/#workers-kv-namespace-read-key-value-pair</a></p>
 
 <h3>Returns</h3><p>The key value.</p>
+
+<h3>Throws</h3><p>The Kv operation request is failed.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -199,7 +203,7 @@ If the KV-pair is set to expire at some point, the expiration time as measured i
 </div></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4></li></ul></li></ul></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/aa1c7d5/src/workersKv.ts#L727">workersKv.ts:727</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/9ba2a33/src/workersKv.ts#L740">workersKv.ts:740</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="write" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>write</span><a href="#write" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">write<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>relativePathParam<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>keyName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>namespaceId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, urlParam<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>expiration<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>expiration_ttl<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> = ...</span></div>
@@ -222,6 +226,8 @@ If both are set, expiration_ttl is used and expiration is ignored.</p>
 <h3>See</h3><p><a href="https://api.cloudflare.com/#workers-kv-namespace-write-key-value-pair">https://api.cloudflare.com/#workers-kv-namespace-write-key-value-pair</a></p>
 
 <h3>Returns</h3><p>True if key is successfully modified or added, false otherwise.</p>
+
+<h3>Throws</h3><p>The Kv operation request is failed.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -258,7 +264,7 @@ If both are set, expiration_ttl is used and expiration is ignored.</p>
 </div></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4></li></ul></li></ul></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/aa1c7d5/src/workersKv.ts#L728">workersKv.ts:728</a></li></ul></aside></section></section>
+<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/9ba2a33/src/workersKv.ts#L741">workersKv.ts:741</a></li></ul></aside></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private"><a id="bridge" class="tsd-anchor"></a>
@@ -289,7 +295,7 @@ It conveys a database operation request to the fetch function, receives a respon
 <h5>validateCfResponseMethod: <span class="tsd-signature-type">&quot;string&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;full&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;withoutResult&quot;</span><span class="tsd-signature-symbol"> = &quot;full&quot;</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">OwnFetchResponse</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/aa1c7d5/src/workersKv.ts#L67">workersKv.ts:67</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/9ba2a33/src/workersKv.ts#L67">workersKv.ts:67</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="createNamespace" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>create<wbr/>Namespace</span><a href="#createNamespace" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -302,6 +308,8 @@ It conveys a database operation request to the fetch function, receives a respon
 <h3>See</h3><p><a href="https://api.cloudflare.com/#workers-kv-namespace-create-a-namespace">https://api.cloudflare.com/#workers-kv-namespace-create-a-namespace</a></p>
 
 <h3>Returns</h3><p>Information about the new namespace.</p>
+
+<h3>Throws</h3><p>The Kv operation request is failed.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -317,7 +325,7 @@ It conveys a database operation request to the fetch function, receives a respon
 </div></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">NamespaceRes</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/aa1c7d5/src/workersKv.ts#L203">workersKv.ts:203</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/9ba2a33/src/workersKv.ts#L206">workersKv.ts:206</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="deleteKeyValuePair" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>delete<wbr/>Key<wbr/>Value<wbr/>Pair</span><a href="#deleteKeyValuePair" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -331,6 +339,8 @@ It conveys a database operation request to the fetch function, receives a respon
 <h3>See</h3><p><a href="https://api.cloudflare.com/#workers-kv-namespace-delete-key-value-pair">https://api.cloudflare.com/#workers-kv-namespace-delete-key-value-pair</a></p>
 
 <h3>Returns</h3><p>True if the key is successfully removed, false otherwise.</p>
+
+<h3>Throws</h3><p>The Kv operation request is failed.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -350,7 +360,7 @@ It conveys a database operation request to the fetch function, receives a respon
 </div></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/aa1c7d5/src/workersKv.ts#L653">workersKv.ts:653</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/9ba2a33/src/workersKv.ts#L665">workersKv.ts:665</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="deleteMultipleKeyValuePairs" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>delete<wbr/>Multiple<wbr/>Key<wbr/>Value<wbr/>Pairs</span><a href="#deleteMultipleKeyValuePairs" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -364,6 +374,8 @@ It conveys a database operation request to the fetch function, receives a respon
 <h3>See</h3><p><a href="https://api.cloudflare.com/#workers-kv-namespace-delete-multiple-key-value-pairs">https://api.cloudflare.com/#workers-kv-namespace-delete-multiple-key-value-pairs</a></p>
 
 <h3>Returns</h3><p>True if keys are successfully removed, false otherwise.</p>
+
+<h3>Throws</h3><p>The Kv operation request is failed.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -388,7 +400,7 @@ It conveys a database operation request to the fetch function, receives a respon
 </div></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/aa1c7d5/src/workersKv.ts#L694">workersKv.ts:694</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/9ba2a33/src/workersKv.ts#L707">workersKv.ts:707</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a id="funcArgHandlers" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>func<wbr/>Arg<wbr/>Handlers</span><a href="#funcArgHandlers" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
@@ -419,7 +431,7 @@ It conveys a database operation request to the fetch function, receives a respon
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/aa1c7d5/src/workersKv.ts#L108">workersKv.ts:108</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/9ba2a33/src/workersKv.ts#L108">workersKv.ts:108</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private"><a id="genReturnFromCfRes" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>gen<wbr/>Return<wbr/>From<wbr/>Cf<wbr/>Res</span><a href="#genReturnFromCfRes" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
@@ -428,6 +440,8 @@ It conveys a database operation request to the fetch function, receives a respon
 <div class="tsd-comment tsd-typography"><p>Parsing and returning the Cloudflare response.</p>
 
 <h3>Function</h3><p>genReturnFromCfRes</p>
+
+<h3>Returns</h3><p>A Cloudflare result that is shorten and pretty formatted.</p>
 
 <h3>Throws</h3><p>The Kv operation request is failed.</p>
 </div>
@@ -448,7 +462,7 @@ It conveys a database operation request to the fetch function, receives a respon
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/aa1c7d5/src/workersKv.ts#L127">workersKv.ts:127</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/9ba2a33/src/workersKv.ts#L128">workersKv.ts:128</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="listNamespaceKeys" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>list<wbr/>Namespace<wbr/>Keys</span><a href="#listNamespaceKeys" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -462,6 +476,8 @@ It conveys a database operation request to the fetch function, receives a respon
 <h3>See</h3><p><a href="https://api.cloudflare.com/#workers-kv-namespace-list-a-namespace-s-keys">https://api.cloudflare.com/#workers-kv-namespace-list-a-namespace-s-keys</a></p>
 
 <h3>Returns</h3><p>A list of namespace&#39;s key as well as the page and cursor information.</p>
+
+<h3>Throws</h3><p>The Kv operation request is failed.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -494,7 +510,7 @@ It conveys a database operation request to the fetch function, receives a respon
 </div></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">NamespaceKeysRes</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/aa1c7d5/src/workersKv.ts#L330">workersKv.ts:330</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/9ba2a33/src/workersKv.ts#L336">workersKv.ts:336</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="listNamespaces" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>list<wbr/>Namespaces</span><a href="#listNamespaces" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -507,6 +523,8 @@ It conveys a database operation request to the fetch function, receives a respon
 <h3>See</h3><p><a href="https://api.cloudflare.com/#workers-kv-namespace-list-namespaces">https://api.cloudflare.com/#workers-kv-namespace-list-namespaces</a></p>
 
 <h3>Returns</h3><p>Information about the new namespace.</p>
+
+<h3>Throws</h3><p>The Kv operation request is failed.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -532,7 +550,7 @@ It conveys a database operation request to the fetch function, receives a respon
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> per_<wbr/>page<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">NamespaceRes</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/aa1c7d5/src/workersKv.ts#L160">workersKv.ts:160</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/9ba2a33/src/workersKv.ts#L162">workersKv.ts:162</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="readKeyMeta" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>read<wbr/>Key<wbr/>Meta</span><a href="#readKeyMeta" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -546,6 +564,8 @@ It conveys a database operation request to the fetch function, receives a respon
 <h3>See</h3><p><a href="https://api.cloudflare.com/#workers-kv-namespace-read-the-metadata-for-a-key">https://api.cloudflare.com/#workers-kv-namespace-read-the-metadata-for-a-key</a></p>
 
 <h3>Returns</h3><p>An object containing the key and value of the metadata.</p>
+
+<h3>Throws</h3><p>The Kv operation request is failed.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -565,7 +585,7 @@ It conveys a database operation request to the fetch function, receives a respon
 </div></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/aa1c7d5/src/workersKv.ts#L427">workersKv.ts:427</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/9ba2a33/src/workersKv.ts#L435">workersKv.ts:435</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="readKeyValuePair" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>read<wbr/>Key<wbr/>Value<wbr/>Pair</span><a href="#readKeyValuePair" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -581,6 +601,8 @@ If the KV-pair is set to expire at some point, the expiration time as measured i
 <h3>See</h3><p><a href="https://api.cloudflare.com/#workers-kv-namespace-read-key-value-pair">https://api.cloudflare.com/#workers-kv-namespace-read-key-value-pair</a></p>
 
 <h3>Returns</h3><p>The key value.</p>
+
+<h3>Throws</h3><p>The Kv operation request is failed.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -600,7 +622,7 @@ If the KV-pair is set to expire at some point, the expiration time as measured i
 </div></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/aa1c7d5/src/workersKv.ts#L387">workersKv.ts:387</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/9ba2a33/src/workersKv.ts#L394">workersKv.ts:394</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="removeNamespace" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>remove<wbr/>Namespace</span><a href="#removeNamespace" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -614,6 +636,8 @@ If the KV-pair is set to expire at some point, the expiration time as measured i
 <h3>See</h3><p><a href="https://api.cloudflare.com/#workers-kv-namespace-remove-a-namespace">https://api.cloudflare.com/#workers-kv-namespace-remove-a-namespace</a></p>
 
 <h3>Returns</h3><p>True if the namespace is successfully removed, false otherwise.</p>
+
+<h3>Throws</h3><p>The Kv operation request is failed.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -629,7 +653,7 @@ If the KV-pair is set to expire at some point, the expiration time as measured i
 </div></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/aa1c7d5/src/workersKv.ts#L241">workersKv.ts:241</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/9ba2a33/src/workersKv.ts#L245">workersKv.ts:245</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="renameNamespace" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>rename<wbr/>Namespace</span><a href="#renameNamespace" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -643,6 +667,8 @@ If the KV-pair is set to expire at some point, the expiration time as measured i
 <h3>See</h3><p><a href="https://api.cloudflare.com/#workers-kv-namespace-rename-a-namespace">https://api.cloudflare.com/#workers-kv-namespace-rename-a-namespace</a></p>
 
 <h3>Returns</h3><p>True if the namespace is successfully renamed, false otherwise.</p>
+
+<h3>Throws</h3><p>The Kv operation request is failed.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -667,7 +693,7 @@ If the KV-pair is set to expire at some point, the expiration time as measured i
 </div></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/aa1c7d5/src/workersKv.ts#L284">workersKv.ts:284</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/9ba2a33/src/workersKv.ts#L289">workersKv.ts:289</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="writeKeyValuePair" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>write<wbr/>Key<wbr/>Value<wbr/>Pair</span><a href="#writeKeyValuePair" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -685,6 +711,8 @@ If both are set, expiration_ttl is used and expiration is ignored.</p>
 <h3>See</h3><p><a href="https://api.cloudflare.com/#workers-kv-namespace-write-key-value-pair">https://api.cloudflare.com/#workers-kv-namespace-write-key-value-pair</a></p>
 
 <h3>Returns</h3><p>True if key is successfully modified or added, false otherwise.</p>
+
+<h3>Throws</h3><p>The Kv operation request is failed.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -721,7 +749,7 @@ If both are set, expiration_ttl is used and expiration is ignored.</p>
 </div></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/aa1c7d5/src/workersKv.ts#L474">workersKv.ts:474</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/9ba2a33/src/workersKv.ts#L483">workersKv.ts:483</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="writeKeyValuePairMeta" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>write<wbr/>Key<wbr/>Value<wbr/>Pair<wbr/>Meta</span><a href="#writeKeyValuePairMeta" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -739,6 +767,8 @@ If both are set, expiration_ttl is used and expiration is ignored.</p>
 <h3>See</h3><p><a href="https://api.cloudflare.com/#workers-kv-namespace-write-key-value-pair-with-metadata">https://api.cloudflare.com/#workers-kv-namespace-write-key-value-pair-with-metadata</a></p>
 
 <h3>Returns</h3><p>True if key is successfully modified or added, false otherwise.</p>
+
+<h3>Throws</h3><p>The Kv operation request is failed.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -787,7 +817,7 @@ If both are set, expiration_ttl is used and expiration is ignored.</p>
 </div></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/aa1c7d5/src/workersKv.ts#L539">workersKv.ts:539</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/9ba2a33/src/workersKv.ts#L549">workersKv.ts:549</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="writeMultipleKeyValuePairs" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>write<wbr/>Multiple<wbr/>Key<wbr/>Value<wbr/>Pairs</span><a href="#writeMultipleKeyValuePairs" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -803,6 +833,8 @@ If both are set, expiration_ttl is used and expiration is ignored. The entire re
 <h3>See</h3><p><a href="https://api.cloudflare.com/#workers-kv-namespace-write-multiple-key-value-pairs">https://api.cloudflare.com/#workers-kv-namespace-write-multiple-key-value-pairs</a></p>
 
 <h3>Returns</h3><p>True if keys are successfully modified or added, false otherwise.</p>
+
+<h3>Throws</h3><p>The Kv operation request is failed.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -822,7 +854,7 @@ If both are set, expiration_ttl is used and expiration is ignored. The entire re
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/aa1c7d5/src/workersKv.ts#L605">workersKv.ts:605</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/ansleehk/Cloudflare-KV-Driver/blob/9ba2a33/src/workersKv.ts#L616">workersKv.ts:616</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
