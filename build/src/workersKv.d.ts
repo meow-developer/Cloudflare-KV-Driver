@@ -52,6 +52,7 @@ export declare class WorkersKv {
      * @param {string} method A desired Cloudflare response format
      * @param {object} req A full information about the HTTP request, database operation perform status, and other Cloudflare responses
      * @param {string} command A short description of the performed operation.
+     * @return A Cloudflare result that is shorten and pretty formatted.
      * @throws {WorkersKvError} The Kv operation request is failed.
      */
     private genReturnFromCfRes;
@@ -66,6 +67,7 @@ export declare class WorkersKv {
      * @param {string} [urlParam.order] Field to order results by
      * @param {string} [urlParam.direction] Direction to order namespaces
      * @returns {Promise<object>} Information about the new namespace.
+     * @throws {WorkersKvError} The Kv operation request is failed.
      */
     listNamespaces(urlParam?: {
         page?: number;
@@ -81,6 +83,7 @@ export declare class WorkersKv {
      * @param {object} data Data for the HTTP body that will send to Cloudflare
      * @param {string} data.title A human-readable string name for a Namespace.
      * @returns {Promise<object>} Information about the new namespace.
+     * @throws {WorkersKvError} The Kv operation request is failed.
      */
     createNamespace(data: {
         title: string;
@@ -94,6 +97,7 @@ export declare class WorkersKv {
      * @param {object} relativePathParam Parameters in the relative path
      * @param {string} relativePathParam.namespaceId The namespace identifier
      * @returns {boolean} True if the namespace is successfully removed, false otherwise.
+     * @throws {WorkersKvError} The Kv operation request is failed.
      */
     removeNamespace(relativePathParam: {
         namespaceId: string;
@@ -109,6 +113,7 @@ export declare class WorkersKv {
      * @param {object} data Data for the HTTP body that will send to Cloudflare
      * @param {string} data.title A human-readable string name for a Namespace.
      * @returns {boolean} True if the namespace is successfully renamed, false otherwise.
+     * @throws {WorkersKvError} The Kv operation request is failed.
      */
     renameNamespace(relativePathParam: {
         namespaceId: string;
@@ -128,6 +133,7 @@ export declare class WorkersKv {
      * @param {string} [urlParam.cursor] Opaque token indicating the position from which to continue when requesting the next set of records if the amount of list results was limited by the limit parameter. A valid value for the cursor can be obtained from the cursors object in the result_info structure.
      * @param {string} [urlParam.prefix] A string prefix used to filter down which keys will be returned. Exact matches and any key names that begin with the prefix will be returned.
      * @return {Promise<object>} A list of namespace's key as well as the page and cursor information.
+     * @throws {WorkersKvError} The Kv operation request is failed.
      */
     listNamespaceKeys(relativePathParam: {
         namespaceId: string;
@@ -148,6 +154,7 @@ export declare class WorkersKv {
      * @param {string} relativePathParam.namespaceId The namespace identifier
      * @param {string} relativePathParam.keyName The name of the key
      * @returns {Promise<string>} The key value.
+     * @throws {WorkersKvError} The Kv operation request is failed.
      */
     readKeyValuePair(relativePathParam: {
         namespaceId: string;
@@ -163,6 +170,7 @@ export declare class WorkersKv {
      * @param {string} relativePathParam.namespaceId The namespace identifier
      * @param {string} relativePathParam.keyName The name of the key
      * @returns {Promise<object>} An object containing the key and value of the metadata.
+     * @throws {WorkersKvError} The Kv operation request is failed.
      */
     readKeyMeta(relativePathParam: {
         namespaceId: string;
@@ -186,6 +194,7 @@ export declare class WorkersKv {
      * @param {number} [urlParam.expiration] The time, measured in number of seconds since the UNIX epoch, at which the key should expire.
      * @param {number} [urlParam.expiration_ttl] The number of seconds for which the key should be visible before it expires. At least 60.
      * @returns {Promise<boolean>} True if key is successfully modified or added, false otherwise.
+     * @throws {WorkersKvError} The Kv operation request is failed.
      */
     writeKeyValuePair(relativePathParam: {
         namespaceId: string;
@@ -214,6 +223,7 @@ export declare class WorkersKv {
      * @param {number} [urlParam.expiration] The time, measured in number of seconds since the UNIX epoch, at which the key should expire.
      * @param {number} [urlParam.expiration_ttl] The number of seconds for which the key should be visible before it expires. At least 60.
      * @returns {Promise<boolean>} True if key is successfully modified or added, false otherwise.
+     * @throws {WorkersKvError} The Kv operation request is failed.
      */
     writeKeyValuePairMeta(relativePathParam: {
         namespaceId: string;
@@ -245,6 +255,7 @@ export declare class WorkersKv {
      * @param {object} [data.metadata] Arbitrary JSON that is associated with a key
      * @param {boolean} [data.base64] Whether or not the server should base64 decode the value before storing it. Useful for writing values that wouldn't otherwise be valid JSON strings, such as images.
      * @returns {Promise<boolean>} True if keys are successfully modified or added, false otherwise.
+     * @throws {WorkersKvError} The Kv operation request is failed.
      */
     writeMultipleKeyValuePairs(relativePathParam: {
         namespaceId: string;
@@ -268,6 +279,7 @@ export declare class WorkersKv {
      * @param {string} relativePathParam.namespaceId The namespace identifier
      * @param {string} relativePathParam.keyName The name of the key
      * @returns {Promise<boolean>} True if the key is successfully removed, false otherwise.
+     * @throws {WorkersKvError} The Kv operation request is failed.
      */
     deleteKeyValuePair(relativePathParam: {
         namespaceId: string;
@@ -284,6 +296,7 @@ export declare class WorkersKv {
      * @param {object} data The data that will send to Cloudflare
      * @param {Array} data.keyName The name of the key
      * @returns {Promise<boolean>} True if keys are successfully removed, false otherwise.
+     * @throws {WorkersKvError} The Kv operation request is failed.
      */
     deleteMultipleKeyValuePairs(relativePathParam: {
         namespaceId: string;
