@@ -9,7 +9,7 @@ export namespace FetchInterfaces {
             headers: Headers
         },
         httpResShortenContentType: "object" | "string",
-        cfRes: CloudflareResponseInterfaces.generalResponse 
+        cfRes: CloudflareResponseInterfaces.GeneralResponse 
                 | CloudflareResponseInterfaces.ResultInfoRes | string,
     }
     /**
@@ -30,7 +30,7 @@ export namespace FetchInterfaces {
     export interface OwnFetchResponse extends FetchResponse{
         isCfNormal: boolean | null
         isCfReqSuccess: boolean | null
-        cfError: CloudflareResponseInterfaces.generalResponse["errors"] | null
+        cfError: CloudflareResponseInterfaces.GeneralResponse["errors"] | null
     }
 
     export type fetchMaterial = [string, RequestInit]

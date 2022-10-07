@@ -122,6 +122,7 @@ export class WorkersKv {
      * @param {string} method A desired Cloudflare response format
      * @param {object} req A full information about the HTTP request, database operation perform status, and other Cloudflare responses
      * @param {string} command A short description of the performed operation.
+     * @return A Cloudflare result that is shorten and pretty formatted.
      * @throws {WorkersKvError} The Kv operation request is failed.
      */
     private genReturnFromCfRes(method: "boolean" | "fullResult" | "string", 
@@ -129,8 +130,8 @@ export class WorkersKv {
                                 command: string){
 
         if (!req.isCfReqSuccess) {
-            if (typeof req.cfRes == "object" && Object.getOwnPropertyNames(req.cfRes).includes("errors")){
-                throw new WorkersKvError(`Failed to ${command}`, "", req.cfRes["errors"])
+            if (req.cfError){
+                throw new WorkersKvError(`Failed to ${command}`, "Please refer to the error message from Cloudflare.", req.cfError)
             } else {
                 throw new WorkersKvError(`Failed to ${command}`, "Cloudflare did not return the error information.", req.http)
             }
@@ -156,6 +157,7 @@ export class WorkersKv {
      * @param {string} [urlParam.order] Field to order results by
      * @param {string} [urlParam.direction] Direction to order namespaces
      * @returns {Promise<object>} Information about the new namespace.
+     * @throws {WorkersKvError} The Kv operation request is failed.
      */
     public async listNamespaces(
         urlParam?: {
@@ -199,6 +201,7 @@ export class WorkersKv {
      * @param {object} data Data for the HTTP body that will send to Cloudflare
      * @param {string} data.title A human-readable string name for a Namespace.
      * @returns {Promise<object>} Information about the new namespace.
+     * @throws {WorkersKvError} The Kv operation request is failed.
      */
     public async createNamespace(
         data: {
@@ -237,6 +240,7 @@ export class WorkersKv {
      * @param {object} relativePathParam Parameters in the relative path
      * @param {string} relativePathParam.namespaceId The namespace identifier
      * @returns {boolean} True if the namespace is successfully removed, false otherwise.
+     * @throws {WorkersKvError} The Kv operation request is failed.
      */
     public async removeNamespace(
         relativePathParam: {
@@ -280,6 +284,7 @@ export class WorkersKv {
      * @param {object} data Data for the HTTP body that will send to Cloudflare
      * @param {string} data.title A human-readable string name for a Namespace.
      * @returns {boolean} True if the namespace is successfully renamed, false otherwise.
+     * @throws {WorkersKvError} The Kv operation request is failed.
      */
     public async renameNamespace(
         relativePathParam: {
@@ -326,6 +331,7 @@ export class WorkersKv {
      * @param {string} [urlParam.cursor] Opaque token indicating the position from which to continue when requesting the next set of records if the amount of list results was limited by the limit parameter. A valid value for the cursor can be obtained from the cursors object in the result_info structure.
      * @param {string} [urlParam.prefix] A string prefix used to filter down which keys will be returned. Exact matches and any key names that begin with the prefix will be returned.
      * @return {Promise<object>} A list of namespace's key as well as the page and cursor information.
+     * @throws {WorkersKvError} The Kv operation request is failed.
      */
     public async listNamespaceKeys(
         relativePathParam: {
@@ -383,6 +389,7 @@ export class WorkersKv {
      * @param {string} relativePathParam.namespaceId The namespace identifier
      * @param {string} relativePathParam.keyName The name of the key
      * @returns {Promise<string>} The key value.
+     * @throws {WorkersKvError} The Kv operation request is failed.
      */
     public async readKeyValuePair(
         relativePathParam: {
@@ -423,6 +430,7 @@ export class WorkersKv {
      * @param {string} relativePathParam.namespaceId The namespace identifier
      * @param {string} relativePathParam.keyName The name of the key
      * @returns {Promise<object>} An object containing the key and value of the metadata.
+     * @throws {WorkersKvError} The Kv operation request is failed.
      */
     public async readKeyMeta(
         relativePathParam: {
@@ -470,6 +478,7 @@ export class WorkersKv {
      * @param {number} [urlParam.expiration] The time, measured in number of seconds since the UNIX epoch, at which the key should expire.
      * @param {number} [urlParam.expiration_ttl] The number of seconds for which the key should be visible before it expires. At least 60.
      * @returns {Promise<boolean>} True if key is successfully modified or added, false otherwise.
+     * @throws {WorkersKvError} The Kv operation request is failed.
      */
     public async writeKeyValuePair(
         relativePathParam: {
@@ -535,6 +544,7 @@ export class WorkersKv {
      * @param {number} [urlParam.expiration] The time, measured in number of seconds since the UNIX epoch, at which the key should expire.
      * @param {number} [urlParam.expiration_ttl] The number of seconds for which the key should be visible before it expires. At least 60.
      * @returns {Promise<boolean>} True if key is successfully modified or added, false otherwise.
+     * @throws {WorkersKvError} The Kv operation request is failed.
      */
     public async writeKeyValuePairMeta(
         relativePathParam: {
@@ -601,6 +611,7 @@ export class WorkersKv {
      * @param {object} [data.metadata] Arbitrary JSON that is associated with a key
      * @param {boolean} [data.base64] Whether or not the server should base64 decode the value before storing it. Useful for writing values that wouldn't otherwise be valid JSON strings, such as images.
      * @returns {Promise<boolean>} True if keys are successfully modified or added, false otherwise.
+     * @throws {WorkersKvError} The Kv operation request is failed.
      */
     public async writeMultipleKeyValuePairs(
         relativePathParam: {
@@ -649,6 +660,7 @@ export class WorkersKv {
      * @param {string} relativePathParam.namespaceId The namespace identifier
      * @param {string} relativePathParam.keyName The name of the key
      * @returns {Promise<boolean>} True if the key is successfully removed, false otherwise.
+     * @throws {WorkersKvError} The Kv operation request is failed.
      */
     public async deleteKeyValuePair(
         relativePathParam: {
@@ -690,6 +702,7 @@ export class WorkersKv {
      * @param {object} data The data that will send to Cloudflare
      * @param {Array} data.keyName The name of the key
      * @returns {Promise<boolean>} True if keys are successfully removed, false otherwise.
+     * @throws {WorkersKvError} The Kv operation request is failed.
      */
     public async deleteMultipleKeyValuePairs(
         relativePathParam: {

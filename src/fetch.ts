@@ -297,7 +297,7 @@ export class CfHttpFetch{
 
             const isCfReqSuccess = this.isCfSuccess(isCfNormal, formattedRes);
 
-            const cfError = this.cfError(formattedRes);
+            const cfError = isCfReqSuccess === true ? null : this.cfError(formattedRes);
 
             return {
                 isCfNormal: isCfNormal,
