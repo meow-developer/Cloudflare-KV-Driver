@@ -128,12 +128,21 @@ export class WorkersKv {
     private genReturnFromCfRes(method: "boolean" | "fullResult" | "string", 
                                 req: FetchInterfaces.OwnFetchResponse, 
                                 command: string){
+        const REF_ERR_MSG = "Please refer to the error message from Cloudflare."
+        const NULL_ERR_MSG = "Cloudflare did not return the error information."
+        const UNCERTAIN_ERR_MSG = `It is uncertain that whether the request \'${command}\' has been performed successfully.`
 
-        if (!req.isCfReqSuccess) {
+        if (req.isCfReqSuccess === false) {
             if (req.cfError){
-                throw new WorkersKvError(`Failed to ${command}`, "Please refer to the error message from Cloudflare.", req.cfError)
+                throw new WorkersKvError(`Failed to ${command}`, REF_ERR_MSG , req.cfError)
             } else {
-                throw new WorkersKvError(`Failed to ${command}`, "Cloudflare did not return the error information.", req.http)
+                throw new WorkersKvError(`Failed to ${command}`, NULL_ERR_MSG, req.http)
+            }
+        } else if (req.isCfReqSuccess === null){
+            if (req.cfError){
+                throw new WorkersKvError(UNCERTAIN_ERR_MSG, REF_ERR_MSG, req.cfError)
+            } else {
+                throw new WorkersKvError(UNCERTAIN_ERR_MSG, NULL_ERR_MSG, req.http)
             }
         }
         switch (method){

@@ -306,6 +306,7 @@ export class CfHttpFetch{
                 ...formattedRes
             };
         } catch (err) {
+            if (err instanceof WorkersKvError) throw err;
             throw new WorkersKvError("Http fetch error", 
                                         "Error occurred when sending a http request", 
                                         serializeError(err));
