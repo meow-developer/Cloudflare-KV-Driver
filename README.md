@@ -1,3 +1,6 @@
+# DEPRECATED
+This is no longer supported
+
 # Cloudflare-KV-Driver
 
 An unofficial Cloudflare Kv Node.js Driver
